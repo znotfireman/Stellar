@@ -1,0 +1,16 @@
+{
+   "name": "Stellar",
+   "emitLegacyScripts": false,
+   "tree": {
+      "$className": "DataModel",
+      "ServerScriptService": {
+         "$className": "ServerScriptService",
+         "StellarTest": {
+            "$path": "test",
+            "Stellar": {
+               "$path": "build"
+            }
+         }
+      }
+   }
+}

@@ -1,0 +1,12 @@
+{
+   "luau-lsp.sourcemap.rojoProjectFile": "test-runner.project.json",
+   "luau-lsp.sourcemap.autogenerate": false,
+   "luau-lsp.require.mode": "relativeToFile",
+   "luau-lsp.ignoreGlobs": [
+      "**/build/**"
+   ],
+   "luau-lsp.require.directoryAliases": {
+      "@src": "./src",
+      "@lune/": "~/.lune/.typedefs/0.8.6/"
+   }
+}

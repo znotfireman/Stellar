@@ -1,0 +1,6 @@
+base: roblox
+name: selene-requires
+globals:
+   require:
+      # overwrite with string requires
+      - type: string

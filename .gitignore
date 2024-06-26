@@ -1,0 +1,30 @@
+# Ignore Roblox files
+*.rbxlx
+*.rbxmx
+*.rbxm
+*.rbxl
+
+# Ignore lock files
+*.lock
+
+# Ignore converted files from Darklua
+build/
+
+# Rojo
+/*.rbxl*
+/*.rbxm*
+
+# Ignore MacOS clutter
+.DS_Store
+/.DS_Store
+
+# Ignore Windows styling
+desktop.ini
+
+# Ignore selene auto-generated config
+roblox.toml
+
+# Luau
+sourcemap*.json
+globalTypes.d.luau
+/*.d.luau
