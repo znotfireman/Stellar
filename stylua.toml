@@ -1,10 +1,10 @@
 call_parentheses = "Input"
 collapse_simple_statement = "Never"
 column_width = 120
-indent_type = "Space"
+indent_type = "Spaces"
 indent_width = 3
 line_endings = "Unix"
 quote_style = "ForceDouble"
 
 [sort_requires]
-   enabled = false
+   enabled = true

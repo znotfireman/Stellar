@@ -6,6 +6,11 @@
          "env": "ROBLOX_DEV"
       },
       {
+         "rule": "inject_global_value",
+         "identifier": "STELLAR_COMPILE_TARGET",
+         "env": "COMPILE_TARGET"
+      },
+      {
          "rule": "convert_require",
          "current": {
             "name": "path",

@@ -1,6 +1,7 @@
 base: roblox
 name: selene-requires
 globals:
-   require:
-      # overwrite with string requires
-      - type: string
+  # override Roblox require style with string requires
+  require:
+    args:
+    - type: string
