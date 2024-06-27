@@ -44,7 +44,7 @@ export type Result<T> = {
 
 export type RuntimeProvider = {
 	policies: {
-		allowWebLinks: boolean,
+		enableWebLinks: boolean,
 	},
 
 	startScheduler: () -> (),
@@ -57,6 +57,11 @@ export type RuntimeProvider = {
 
 	throwErrorNonFatal: (messageString: string) -> (),
 	throwWarning: (messageString: string) -> (),
+}
+
+export type Symbol = {
+	type: "Symbol",
+	kind: string,
 }
 
 export type Version = {
@@ -81,13 +86,19 @@ export type Task = never
    | FusionTypes.Scope<any>
 
 --[[
-   State object related types
+	State object related types
 ]]
 
-export type EventualConstructor<T, S> = (
+export type EventualConstructor = <T, S>(
 	scope: Scope<any> & S,
 	initialValue: T,
 	computation: (become: <T>(target: T) -> T, use: Use, scope: Scope<any> & S) -> T
+) -> StateObject<T>
+
+export type FreezeConstructor = <T>(
+	scope: Scope<any>,
+	target: StateObject<T>,
+	isFrozen: StateObject<boolean>
 ) -> StateObject<T>
 
 export type ObserveConstructor = (
@@ -96,14 +107,29 @@ export type ObserveConstructor = (
 	callback: () -> ()
 ) -> () -> ()
 
+export type SwitchConstructor = <Options, Result>(
+	scope: Scope<any>,
+	target: StateObject<Options>,
+	options: { [Options | { type: "Symbol", kind: "SwitchDefault" }]: () -> Result }
+) -> StateObject<Result>
+
+export type ToggleConstructor = <Default, Fallback>(
+	scope: Scope<any>,
+	target: StateObject<any>,
+	options: {
+		show: () -> Default,
+		fallback: (() -> Fallback)?,
+	}
+) -> StateObject<Default | Fallback>
+
 --[[
-   Instance related types
+	Instance related types
 ]]
 
 export type Child = Instance | StateObject<Child> | UnresolvedChild | { Child }
 
-export type DefaultKeyConstructor = (propertyName: string) -> DefaultKey
 type DefaultKey = { type: "DefaultKey", prop: string }
+export type DefaultKeyConstructor = (propertyName: string) -> DefaultKey
 
 export type DeriveConstructor = <T>(scope: Scope<any>, template: T & Instance) -> (propertyTable: PropertyTable) -> T
 

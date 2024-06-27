@@ -1,5 +1,6 @@
 --[[
-   Formats a Stellar-specific error message.
+	Formats a Stellar-specific error message. Partically vendored from Fusion
+	0.3 push-pull-execution.
 ]]
 
 local Types = require("@src/Types")
@@ -27,7 +28,7 @@ local function formatError(
 	local trace: string? = if typeof(errorOrTrace) == "table" then errorOrTrace.trace else errorOrTrace
 	message = message:gsub(ERROR_PLACEHOLDER, error and error.message or originalMessageId)
 	local message = "[Stellar] " .. message .. "\nID: " .. messageId
-	if runtime and runtime.policies.allowWebLinks then
+	if runtime and runtime.policies.enableWebLinks then
 		message ..= "\nLearn more: " .. ERROR_API_URL .. messageId:lower()
 	end
 	if trace ~= nil then

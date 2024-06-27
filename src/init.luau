@@ -5,17 +5,24 @@
 
 local Fusion = require("@src/Fusion")
 local Runtime = require("@src/Runtime")
+local Symbols = require("@src/Utility/Symbols")
 local Types = require("@src/Types")
 
 do
-	-- Down the line, this will be conditional based on what runtime Stellar
-	-- is compiled for.
+	-- Down the line, this will be conditional based on what runtime Stellar is
+	-- compiled for.
 	local RobloxRuntime = require("@src/RobloxRuntime")
 	Runtime.setProvider(RobloxRuntime)
 	local result = Fusion.setInstallation(Fusion.findInstallation("roblox") :: any)
 	if not result.ok then
 		Runtime.throwError("invalidFusionInstallation", nil, result.reason)
 	end
+
+	local function inlineTest(): string
+		return debug.info(1, "n")
+	end
+	local isO2 = inlineTest() ~= "inlineTest"
+	Runtime.setStrictMode(not isO2)
 end
 
 export type Child = Types.Child
@@ -29,9 +36,14 @@ type Stellar = {
 	version: Version,
 	setInstallation: (newInstallation: Types.Fusion) -> Result<Types.Fusion?>,
 	setProvider: (newProvider: RuntimeProvider) -> RuntimeProvider?,
+	setStrictMode: (newValue: boolean) -> (),
 
+	Freeze: Types.FreezeConstructor,
 	Observe: Types.ObserveConstructor,
 	ObserveBind: Types.ObserveConstructor,
+	ReadOnly: <T>(scope: Types.Scope<any>, target: Types.StateObject<T>) -> Types.StateObject<T>,
+	Switch: Types.SwitchConstructor,
+	Toggle: Types.ToggleConstructor,
 	flatten: (target: Types.UsedAs<any>, use: Types.Use?) -> any,
 
 	Apply: Types.SpecialKey,
@@ -63,8 +75,12 @@ type Stellar = {
 	extendedCleanup: (...Task) -> (),
 
 	scopable: {
+		Freeze: Types.FreezeConstructor,
 		Observe: Types.ObserveConstructor,
 		ObserveBind: Types.ObserveConstructor,
+		ReadOnly: <T>(scope: Types.Scope<any>, target: Types.StateObject<T>) -> Types.StateObject<T>,
+		Switch: Types.SwitchConstructor,
+		Toggle: Types.ToggleConstructor,
 
 		Derive: Types.DeriveConstructor,
 
@@ -96,10 +112,15 @@ local Stellar: Stellar = table.freeze {
 	version = { major = 0, minor = 1, patch = 0 },
 	setInstallation = Fusion.setInstallation,
 	setProvider = Runtime.setProvider,
+	setStrictMode = Runtime.setStrictMode,
 
 	-- State
+	Freeze = require("@src/State/Freeze"),
 	Observe = require("@src/State/Observe"),
 	ObserveBind = require("@src/State/ObserveBind"),
+	ReadOnly = require("@src/State/ReadOnly"),
+	Switch = require("@src/State/Switch"),
+	Toggle = require("@src/State/Toggle"),
 	flatten = require("@src/State/flatten"),
 
 	-- Instances
@@ -136,6 +157,14 @@ local Stellar: Stellar = table.freeze {
 	extendedCleanup = require("@src/Utility/extendedCleanup"),
 
 	scopable = table.freeze {
+		-- State
+		Freeze = require("@src/State/Freeze"),
+		Observe = require("@src/State/Observe"),
+		ObserveBind = require("@src/State/ObserveBind"),
+		ReadOnly = require("@src/State/ReadOnly"),
+		Switch = require("@src/State/Switch"),
+		Toggle = require("@src/State/Toggle") :: Types.ToggleConstructor,
+
 		-- Instances
 		Derive = require("@src/Instances/Derive"),
 
@@ -157,10 +186,6 @@ local Stellar: Stellar = table.freeze {
 		DescendantsOf = require("@src/Instances/DescendantsOf"),
 		BindProperty = require("@src/Instances/BindProperty"),
 		PropertyOf = require("@src/Instances/PropertyOf"),
-
-		-- State
-		Observe = require("@src/State/Observe"),
-		ObserveBind = require("@src/State/ObserveBind"),
 
 		-- Utility
 		expandedCleanup = require("@src/Utility/extendedCleanup"),

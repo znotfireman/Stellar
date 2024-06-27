@@ -10,7 +10,7 @@ local Types = require("@src/Types")
 
 local RobloxRuntime = {} :: Types.RuntimeProvider
 RobloxRuntime.policies = {
-	allowWebLinks = RunService:IsStudio(),
+	enableWebLinks = RunService:IsStudio(),
 }
 
 local stopSchedulerFn: () -> ()? = nil

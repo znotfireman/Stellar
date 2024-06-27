@@ -1,8 +1,20 @@
-<img align="right" src="./gh-assets/logo-dark.svg#gh-dark-mode-only" alt="Stellar" width="200"><img align="right" src="./gh-assets/logo-light.svg#gh-light-mode-only" alt="Stellar" width="200">
+<img
+	align="right"
+	src="./gh-assets/logo-dark.svg#gh-dark-mode-only"
+	alt="Stellar"
+	width="200">
+<img
+	align="right"
+	src="./gh-assets/logo-light.svg#gh-light-mode-only"
+	alt="Stellar"
+	width="200">
+
 # Stellar
 **A radiant collection of Fusion v0.3 utilities.**
 
-Stellar is a collection of utilities that extend the Fusion reactive state library, implementing common conventions that builds upon Fusion's strengths, making it a breeze to write declarative user interface.
+Stellar is a collection of utilities that extend the Fusion reactive state
+library, implementing common conventions that builds upon Fusion's strengths,
+making it a breeze to write declarative user interface.
 
 It's dead easy to get started:
 
@@ -20,7 +32,7 @@ local message = scope:Computed(function(use, scope)
 end)
 
 -- Stellar's own constructors are exposed too!
-local Child, WithChild, = Stellar.Child, Stellar.WithChild
+local Children, Child, WithChild, = Stellar.Children, Stellar.Child, Stellar.WithChild
 local label = scope:Derive (ReplicatedStorage.TemplateBtn) {
     Text = message,
     [Children] = Child {

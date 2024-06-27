@@ -16,12 +16,12 @@ local function ObserveBind(
 	if castToState(watching) then
 		return Fusion.Observer(scope, watching):onBind(callback)
 	end
-	if typeof(watching) ~= "table" then
+	if Runtime.isStrict() and typeof(watching) ~= "table" then
 		return Runtime.throwError("invalidStateObject", nil, typeof(watching), "ObserveBind()")
 	end
 	local disconnectFns: { () -> () } = {}
 	for _, stateObject in ipairs(watching) do
-		if not castToState(stateObject) then
+		if Runtime.isStrict() and not castToState(stateObject) then
 			return Runtime.throwError("invalidStateObject", nil, typeof(watching), "ObserveBind()")
 		end
 		-- Use onChange as to not bind the callback several times

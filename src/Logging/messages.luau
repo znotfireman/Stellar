@@ -1,5 +1,5 @@
 --[[
-   Exports template logging messages to be used by Stellar.
+	Exports template logging messages to be used by Stellar.
 ]]
 
 return table.freeze {
@@ -10,6 +10,8 @@ return table.freeze {
 	destroyedTwice = "`expandedCleanup()` was given something it was already cleaning up. Unclear how to proceed.",
 	invalidApplyValue = "[Apply] must be given an array of property tables",
 	invalidAttributeName = "'%s' type attribute names aren't accepted by `%s`.",
+	invalidSwitchOption = "Option '%s' must be a function, got type '%s'.",
+	invalidSwitchOptions = "'%s' type options aren't accepted by `%s`.",
 	invalidFusionInstallation = "Stellar got invalid Fusion installation; %s.",
 	invalidPropertyName = "'%s' type property names aren't accepted by `%s`",
 	invalidPropertyType = "'%s.%s' expected a %s type, but got a '%s' type.",

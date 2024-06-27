@@ -12,15 +12,20 @@ local Runtime = {}
 -- stricten tests on infinite loop detection during unit testing.
 Runtime.safetyTimeMultiplier = 1
 
-local currentRuntime: Types.RuntimeProvider? = nil
-local lastUpdateStep = 0
-local updateStepCallbacks: { [{}]: (now: number) -> () } = {}
+-- If strict mode is enabled, Stellar will perform additional safety checks.
+-- Strict mode is automatically enabled if not running in O2 optimization level,
+-- which is the default for Roblox Studio.
+local strictMode: boolean = true
 
 -- During critical periods of a program, Stellar can decide to change it
 -- internal to be more performance friendly. Holding strong references here
 -- would let threads that are cancelled before the runtime finishes its callback
 -- be held strongly forever.
 local timeCriticalThreads: { [thread]: boolean } = setmetatable({}, { __mode = "k" }) :: any
+
+local currentRuntime: Types.RuntimeProvider? = nil
+local lastUpdateStep = 0
+local updateStepCallbacks: { [{}]: (now: number) -> () } = {}
 
 function Runtime.isTimeCritical(): boolean
 	return timeCriticalThreads[coroutine.running()] == true
@@ -36,6 +41,14 @@ function Runtime.runTimeCritical<A..., R...>(callback: (A...) -> R..., ...: A...
 	end
 	timeCriticalThreads[thread] = nil
 	return table.unpack(pack :: any, 1, pack.n)
+end
+
+function Runtime.isStrict(): boolean
+	return strictMode
+end
+
+function Runtime.setStrictMode(newValue: boolean)
+	strictMode = not not newValue
 end
 
 function Runtime.setProvider(newRuntime: Types.RuntimeProvider): Types.RuntimeProvider?

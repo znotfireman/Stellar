@@ -1,6 +1,6 @@
 --[[
-   `xpcall()` error handler used to parse useful error information including
-   stack traces and readable messages.
+	`xpcall()` error handler used to parse useful error information including
+	stack traces and readable messages.
 ]]
 
 local Types = require("@src/Types")
@@ -28,8 +28,8 @@ local function getTraceDepth(trace: string): number
 end
 
 local function parseError(error: string): Types.Error
-	return {
-		type = "Error",
+	return table.freeze {
+		type = "Error" :: "Error",
 		raw = error,
 		message = error:gsub("^.+:%d+:%s*", ""),
 		trace = debug.traceback(nil, getTraceDepth(debug.info(1, "s"))),
