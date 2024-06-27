@@ -25,6 +25,7 @@ local AncestorsOf = require("@src/Instances/AncestorsOf")
 local Apply = require("@src/Instances/Apply")
 local AttributesOf = require("@src/Instances/AttributesOf")
 local BatchKeys = require("@src/Instances/BatchKeys")
+local Child = require("@src/Instances/Child")
 local Children = require("@src/Instances/Children")
 local ChildrenOf = require("@src/Instances/ChildrenOf")
 local Cleanup = require("@src/Instances/Cleanup")
@@ -56,6 +57,7 @@ type Stellar = {
 
 	Apply: Types.SpecialKey,
 	BatchKeys: (stage: "self" | "ancestor" | "descendants" | "observer") -> Types.SpecialKey,
+	Child: (child: { Types.Child }) -> Types.Child,
 	Children: Types.SpecialKey,
 	Cleanup: Types.SpecialKey,
 	Default: Types.DefaultKeyConstructor,
@@ -96,6 +98,7 @@ local Stellar: Stellar = table.freeze {
 
 	Apply = Apply,
 	BatchKeys = BatchKeys,
+	Child = Child,
 	Children = Children,
 	Cleanup = Cleanup,
 	Default = Default,

@@ -21,9 +21,9 @@ local label = scope:Derive (ReplicatedStorage.TemplateBtn) {
     [Children] = Child {
         WithChild "UIStroke" {
             Color = scope:Eventual(Color3.new(1, 0, 0), function(become, use, scope)
-            become(Color3.new(1, 0, 0))
-            task.wait(5) -- very expensive computation
-            return Color3.new(0, 1, 0)
+				become(Color3.new(1, 0, 0))
+				task.wait(5) -- very expensive computation
+				return Color3.new(0, 1, 0)
             end)
         }
     }
