@@ -1,5 +1,5 @@
 --[[
-   Non error throwing values. Intended to be used by validators.
+   Non-throwing error values. Intended to be used by validators.
 ]]
 
 export type Result<T> = Ok<T> | Err
