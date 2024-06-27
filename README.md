@@ -17,16 +17,16 @@ end)
 -- Stellar's own constructors are exposed too!
 local WithChild, Props = Stellar.Props, Stellar.WithChild
 local label = scope:Derive (ReplicatedStorage.TemplateBtn) {
-	Text = message,
-	[Children] = Child {
-		WithChild "UIStroke" {
-			Color = scope:Eventual(Color3.new(1, 0, 0), function(become, use, scope)
-			become(Color3.new(1, 0, 0))
-			task.wait(5) -- very expensive computation
-			return Color3.new(0, 1, 0)
-			end)
-		}
-	}
+    Text = message,
+    [Children] = Child {
+        WithChild "UIStroke" {
+            Color = scope:Eventual(Color3.new(1, 0, 0), function(become, use, scope)
+            become(Color3.new(1, 0, 0))
+            task.wait(5) -- very expensive computation
+            return Color3.new(0, 1, 0)
+            end)
+        }
+    }
 }
 ```
 # Crash Course

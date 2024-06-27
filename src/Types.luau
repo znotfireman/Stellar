@@ -127,11 +127,7 @@ export type InstancesSelector = (
 	instance: UsedAs<Instance>
 ) -> StateObject<{ [number]: Instance }>
 
-export type NameSelector = (
-	scope: Scope<any>,
-	instance: UsedAs<Instance>,
-	name: string
-) -> StateObject<Instance?>
+export type NameSelector = (scope: Scope<any>, instance: UsedAs<Instance>, name: string) -> StateObject<Instance?>
 
 export type PropertySelector = (
 	scope: Scope<any>,

@@ -1,10 +1,10 @@
 {
 	"languageMode": "strict",
-   "lint": {
-      "*": true,
-      "FunctionUnused": false,
-      "ImportUnused": false,
-      "LocalShadow": false,
-      "LocalUnused": false
-   }
+	"lint": {
+		"*": true,
+		"FunctionUnused": false,
+		"ImportUnused": false,
+		"LocalShadow": false,
+		"LocalUnused": false
+	}
 }

@@ -1,7 +1,7 @@
 {
-   "name": "Stellar",
-   "emitLegacyScripts": false,
-   "tree": {
-      "$path": "build"
-   }
+	"name": "Stellar",
+	"emitLegacyScripts": false,
+	"tree": {
+		"$path": "build"
+	}
 }
