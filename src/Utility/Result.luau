@@ -1,3 +1,7 @@
+--[[
+   Non error throwing values. Intended to be used by validators.
+]]
+
 export type Result<T> = Ok<T> | Err
 export type Ok<T> = { ok: true, value: T }
 export type Err = { ok: false, reason: string }
@@ -17,6 +21,15 @@ function Result.unwrap<T>(result: Result<T>): T?
       return result.value
    end
    return nil
+end
+
+function Result.castToResult<T>(value: T | Result<T>): Result<T>?
+   if typeof(value) ~= "table" then
+      return nil
+   end
+   local isOk = value.ok == true and value.value ~= nil
+   local isErr = value.ok == false and typeof(value.reason) == "string"
+   return if isOk or isErr then value else nil
 end
 
 table.freeze(Result)

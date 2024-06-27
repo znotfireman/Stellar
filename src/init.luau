@@ -1,66 +1,104 @@
---------------------------------------------------------------------------------
--- Stellar.luau
--- v0.1.0
---------------------------------------------------------------------------------
+--[[
+   Entry point for the Stellar library.
+]]
 
 local Fusion = require("@src/Fusion")
 local Runtime = require("@src/Runtime")
 local Types = require("@src/Types")
 
 do
-   local fusionExports: Types.Fusion? = nil
-   local runtime = Runtime.detectRuntime()
-   if _G.STELLAR_COMPILE_TARGET == "roblox" or runtime == "roblox" then
-      local RobloxRuntime = require("@src/Runtime/RobloxRuntime")
-      Runtime.setProvider(RobloxRuntime)
-   elseif _G.STELLAR_COMPILE_TARGET == "lune" or runtime == "lune" then
-      local LuneRuntime = require("@src/Runtime/LuneRuntime")
-      Runtime.setProvider(LuneRuntime)
-   end
-   fusionExports = Fusion.tryDiscoverInstallation(runtime :: any)
-   local ok, reason = Fusion.setInstallation(fusionExports :: any)
-   if not ok then
-      Runtime.throwError("invalidFusionInstallation", nil, reason)
+   -- Down the line, this will be conditional based on what runtime Stellar
+   -- is compiled for.
+   local RobloxRuntime = require("@src/RobloxRuntime")
+   Runtime.setProvider(RobloxRuntime)
+
+   local result = Fusion.setInstallation(Fusion.findInstallation("roblox") :: any)
+   if not result.ok then
+      Runtime.throwError("invalidFusionInstallation", nil, result.reason)
    end
    if not Fusion.hasInstallation() then
       Runtime.throwError("noFusionInstallation")
    end
 end
 
+-- Instances
+local Apply = require("@src/Instances/Apply")
 local BatchKeys = require("@src/Instances/BatchKeys")
-local deepfreeze = require("@src/Utility/deepfreeze")
-local expandedCleanup = require("@src/Utility/expandedCleanup")
+local Children = require("@src/Instances/Children")
+local Cleanup = require("@src/Instances/Cleanup")
+local Default = require("@src/Instances/Default")
+local WaitChild = require("@src/Instances/WaitChild")
+local WithChild = require("@src/Instances/WithChild")
+-- State
+local Observe = require("@src/State/Observe")
+local ObserveBind = require("@src/State/ObserveBind")
+local flatten = require("@src/State/flatten")
+-- Utility
+local extendedCleanup = require("@src/Utility/extendedCleanup")
 
-export type Task = Types.Task
+export type Child = Types.Child
 export type Result<T> = Types.Result<T>
-export type Version = Types.Version
 export type RuntimeProvider = Types.RuntimeProvider
+export type Task = Types.Task
+export type UnresolvedChild = Types.UnresolvedChild
+export type Version = Types.Version
 
 type Stellar = {
    version: Version,
    setInstallation: (newInstallation: Types.Fusion) -> Result<Types.Fusion?>,
    setProvider: (newProvider: RuntimeProvider) -> RuntimeProvider?,
 
-   BatchKeys: (stage: "self" | "ancestor" | "descendants" | "observer") -> Types.SpecialKey,
+   Observe: Types.ObserveConstructor,
+   ObserveBind: Types.ObserveConstructor,
+   flatten: (target: Types.UsedAs<any>, use: Types.Use?) -> any,
 
-   expandedCleanup: (...Task) -> (),
+   Apply: Types.SpecialKey,
+   BatchKeys: (stage: "self" | "ancestor" | "descendants" | "observer") -> Types.SpecialKey,
+   Children: Types.SpecialKey,
+   Cleanup: Types.SpecialKey,
+   Default: (name: string) -> { type: "DefaultKey", prop: string },
+   WaitChild: (name: string) -> (properties: Types.PropertyTable) -> UnresolvedChild,
+   WithChild: (name: string) -> (properties: Types.PropertyTable) -> UnresolvedChild,
+
+   extendedCleanup: (...Task) -> (),
 
    scopable: {
+      Observe: Types.ObserveConstructor,
+      ObserveBind: Types.ObserveConstructor,
+
       expandedCleanup: (...Task) -> (),
    },
 }
 
-return deepfreeze {
-   version = { major = 0, minor = 1, patch = 0 },
+local Stellar: Stellar = table.freeze {
+   version = table.freeze { major = 0, minor = 1, patch = 0 },
    setInstallation = Fusion.setInstallation,
    setProvider = Runtime.setProvider,
 
-   BatchKeys = BatchKeys,
+   -- State
+   Observe = Observe,
+   ObserveBind = ObserveBind,
+   flatten = flatten,
 
-   expandedCleanup = expandedCleanup,
+   -- Instance API
+   Apply = Apply,
+   BatchKeys = BatchKeys,
+   Children = Children,
+   Cleanup = Cleanup,
+   Default = Default,
+   WaitChild = WaitChild,
+   WithChild = WithChild,
+
+   -- Utility
+   extendedCleanup = extendedCleanup,
 
    -- Methods designed to use scoped() syntax
-   scopable = {
-      expandedCleanup = expandedCleanup,
+   scopable = table.freeze {
+      -- State
+      Observe = Observe,
+      ObserveBind = ObserveBind,
+
+      -- Utility
+      expandedCleanup = extendedCleanup,
    },
-} :: Stellar
+}

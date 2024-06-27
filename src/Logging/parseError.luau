@@ -1,3 +1,8 @@
+--[[
+   `xpcall()` error handler used to parse useful error information including
+   stack traces and readable messages.
+]]
+
 local Types = require("@src/Types")
 
 local function getPath(trace: string)

@@ -1,3 +1,8 @@
+--[[
+   Extended `doCleanup()`, also accepts signal-like objects, promises, threads
+   and objects with disconnect methods.
+]]
+
 local Fusion = require("@src/Fusion")
 local Runtime = require("@src/Runtime")
 local Types = require("@src/Types")
@@ -73,7 +78,7 @@ local function tryCleanupOne(job: Types.Task)
       end
       if not isDestroyed and table[1] ~= nil then
          -- Case 7: scopes
-         local scope = table :: Fusion.Scope<unknown>
+         local scope = table :: Types.Scope<unknown>
          for _, subtask in ipairs(scope) do
             tryCleanupOne(subtask :: any)
          end
@@ -86,10 +91,10 @@ local function tryCleanupOne(job: Types.Task)
    alreadyDestroying[job] = nil
 end
 
-local function expandedCleanup(...: Types.Task)
+local function extendedCleanup(...: Types.Task)
    for _, job in ipairs { ... } do
       tryCleanupOne(job)
    end
 end
 
-return expandedCleanup
+return extendedCleanup

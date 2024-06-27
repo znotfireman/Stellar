@@ -6,7 +6,7 @@
       "**/build/**"
    ],
    "luau-lsp.require.directoryAliases": {
-      "@src": "./src",
+      "@src/": "./src",
       "@lune/": "~/.lune/.typedefs/0.8.6/"
    }
 }

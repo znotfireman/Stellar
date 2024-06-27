@@ -1,5 +1,12 @@
+--[[
+   A special key allowing users to bulk-apply special keys at the designated
+   stage regardless of it's predefined stage.
+]]
+
 local Runtime = require("@src/Runtime")
 local Types = require("@src/Types")
+-- Instances
+local castToSpecialKey = require("@src/Instances/castToSpecialKey")
 
 type Stage = "self" | "ancestor" | "descendants" | "observer"
 
@@ -7,16 +14,6 @@ local keyCache: { [Stage]: Types.SpecialKey } = {}
 
 local function castToStage(value: any): Stage?
    return if value == "self" or value == "ancestor" or value == "descendants" or value == "observer" then value else nil
-end
-
-local function castToKey(value: any): Types.SpecialKey?
-   return if typeof(value) == "table"
-         and value.type == "SpecialKey"
-         and typeof(value.kind) == "string"
-         and castToStage(value.stage)
-         and typeof(value.apply) == "function"
-      then value
-      else nil
 end
 
 local function BatchKeys(stage: Stage): Types.SpecialKey
@@ -38,8 +35,8 @@ local function BatchKeys(stage: Stage): Types.SpecialKey
       end
       local batch: { [Types.SpecialKey]: any } = value :: any
       for k: Types.SpecialKey, v in pairs(batch) do
-         if not castToKey(k) then
-            return Runtime.throwError("unrecognizedSpecialKey", nil, "[BatchKeys]")
+         if not castToSpecialKey(k) then
+            return Runtime.throwError("invalidSpecialKey", nil, "[BatchKeys]")
          end
          k:apply(scope, value, instance)
       end
