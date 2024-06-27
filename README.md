@@ -1,4 +1,6 @@
-<img align="left" src="./gh-assets/wordmark-dark.svg#gh-dark-mode-only" alt="Stellar" width="384"><img align="left" src="./gh-assets/wordmark-light.svg#gh-light-mode-only" alt="Fusion" width="384"><img src="./gh-assets/float.svg">
+<img align="left" src="./gh-assets/logo-dark.svg#gh-dark-mode-only" alt="Stellar" width="200"><img align="left" src="./gh-assets/logo-light.svg#gh-light-mode-only" alt="Stellar" width="200">
+<img src="./gh-assets/float-right.svg" height="200" width="20" align="left">
+# Stellar
 **A radiant collection of Fusion v0.3 utilities.**
 
 Stellar is a collection of utilities that extend the Fusion reactive state library, implementing common conventions that builds upon Fusion's strengths, making it a breeze to write declarative user interface.
