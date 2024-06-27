@@ -1,5 +1,4 @@
-# Stellar
-
+<img align="left" src="./gh-assets/wordmark-dark.svg#gh-dark-mode-only" alt="Stellar" width="256"><img align="left" src="./gh-assets/wordmark-light.svg#gh-light-mode-only" alt="Fusion" width="256"><img src="./gh-assets/float.svg">
 **A radiant collection of Fusion v0.3 utilities.**
 
 Stellar is a collection of utilities that extend the Fusion reactive state library, implementing common conventions that builds upon Fusion's strengths, making it a breeze to write declarative user interface.
@@ -20,7 +19,7 @@ local message = scope:Computed(function(use, scope)
 end)
 
 -- Stellar's own constructors are exposed too!
-local WithChild, Props = Stellar.Props, Stellar.WithChild
+local Child, WithChild, = Stellar.Child, Stellar.WithChild
 local label = scope:Derive (ReplicatedStorage.TemplateBtn) {
     Text = message,
     [Children] = Child {

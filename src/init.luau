@@ -1,6 +1,6 @@
 --[[
 	Packages up the internal of Stellar and exposes an API for it. Connects to
-	Fusion if it finds one.
+	Fusion if it finds a valid installation.
 ]]
 
 local Fusion = require("@src/Fusion")
