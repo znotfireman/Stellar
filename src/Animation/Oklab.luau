@@ -7,7 +7,7 @@
 	See: https://bottosson.github.io/posts/oklab/
 ]]
 
-local sRGB = require("@src/Color/sRGB")
+local sRGB = require("@src/Animation/sRGB")
 
 local Oklab = {}
 
