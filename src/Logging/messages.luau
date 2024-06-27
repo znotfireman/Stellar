@@ -11,6 +11,7 @@ return table.freeze {
 	invalidApplyValue = "[Apply] must be given an array of property tables",
 	invalidAttributeName = "'%s' type attribute names aren't accepted by `%s`.",
 	invalidFusionInstallation = "Stellar got invalid Fusion installation; %s.",
+	invalidPropertyName = "'%s' type property names aren't accepted by `%s`",
 	invalidPropertyType = "'%s.%s' expected a %s type, but got a '%s' type.",
 	invalidSpecialKey = "'%s' type special keys aren't accepted by `%s`",
 	invalidStateObject = "'%s' type state objects aren't accepted by `%s`",

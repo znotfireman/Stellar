@@ -2,7 +2,6 @@
 	A selector that returns the children of an instance.
 ]]
 
-local Fusion = require("@src/Fusion")
 local Runtime = require("@src/Runtime")
 local Types = require("@src/Types")
 -- Utility
@@ -18,12 +17,7 @@ local function ChildenOf(
 			return {}
 		end
 		table.insert(scope, instance.ChildAdded:Connect(refresh))
-		table.insert(
-			scope,
-			instance.ChildRemoved:Connect(function()
-				Runtime.deferTask(refresh)
-			end)
-		)
+		table.insert(scope, instance.ChildRemoved:Connect(refresh))
 		return instance:GetChildren()
 	end)
 end

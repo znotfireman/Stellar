@@ -48,12 +48,17 @@ type Stellar = {
 	AncestorOfClass: Types.ClassNameSelector,
 	AncestorWhichIsA: Types.ClassNameSelector,
 	AncestorsOf: Types.InstancesSelector,
-	AttributesOf: Types.AttributesSelector,
 	AttributeNamed: Types.AttributeSelector,
+	AttributesOf: Types.AttributesSelector,
 	BindAttribute: Types.BindAttributeSelector,
 	HasAttribute: Types.HasAttributeSelector,
 	ChildrenOf: Types.InstancesSelector,
+	DescendantNamed: Types.NameSelector,
+	DescendantOfClass: Types.ClassNameSelector,
+	DescendantWhichIsA: Types.ClassNameSelector,
 	DescendantsOf: Types.InstancesSelector,
+	BindProperty: Types.BindPropertySelector,
+	PropertyOf: Types.PropertySelector,
 
 	extendedCleanup: (...Task) -> (),
 
@@ -67,26 +72,37 @@ type Stellar = {
 		AncestorOfClass: Types.ClassNameSelector,
 		AncestorWhichIsA: Types.ClassNameSelector,
 		AncestorsOf: Types.InstancesSelector,
-		AttributesOf: Types.AttributesSelector,
 		AttributeNamed: Types.AttributeSelector,
+		AttributesOf: Types.AttributesSelector,
 		BindAttribute: Types.BindAttributeSelector,
 		HasAttribute: Types.HasAttributeSelector,
+		ChildNamed: Types.NameSelector,
+		ChildOfClass: Types.ClassNameSelector,
+		ChildWhichIsA: Types.ClassNameSelector,
 		ChildrenOf: Types.InstancesSelector,
+		DescendantNamed: Types.NameSelector,
+		DescendantOfClass: Types.ClassNameSelector,
+		DescendantWhichIsA: Types.ClassNameSelector,
 		DescendantsOf: Types.InstancesSelector,
+		BindProperty: Types.BindPropertySelector,
+		PropertyOf: Types.PropertySelector,
 
 		expandedCleanup: (...Task) -> (),
 	},
 }
 
 local Stellar: Stellar = table.freeze {
+	-- General
 	version = { major = 0, minor = 1, patch = 0 },
 	setInstallation = Fusion.setInstallation,
 	setProvider = Runtime.setProvider,
 
+	-- State
 	Observe = require("@src/State/Observe"),
 	ObserveBind = require("@src/State/ObserveBind"),
 	flatten = require("@src/State/flatten"),
 
+	-- Instances
 	Apply = require("@src/Instances/Apply"),
 	BatchKeys = require("@src/Instances/BatchKeys"),
 	Child = require("@src/Instances/Child"),
@@ -101,32 +117,52 @@ local Stellar: Stellar = table.freeze {
 	AncestorOfClass = require("@src/Instances/AncestorOfClass"),
 	AncestorWhichIsA = require("@src/Instances/AncestorWhichIsA"),
 	AncestorsOf = require("@src/Instances/AncestorsOf"),
-	AttributesOf = require("@src/Instances/AttributesOf"),
 	AttributeNamed = require("@src/Instances/AttributeNamed"),
+	AttributesOf = require("@src/Instances/AttributesOf"),
 	BindAttribute = require("@src/Instances/BindAttribute"),
 	HasAttribute = require("@src/Instances/HasAttribute"),
+	ChildNamed = require("@src/Instances/ChildNamed"),
+	ChildOfClass = require("@src/Instances/ChildOfClass"),
+	ChildWhichIsA = require("@src/Instances/ChildWhichIsA"),
 	ChildrenOf = require("@src/Instances/ChildrenOf"),
+	DescendantNamed = require("@src/Instances/DescendantNamed"),
+	DescendantOfClass = require("@src/Instances/DescendantOfClass"),
+	DescendantWhichIsA = require("@src/Instances/DescendantWhichIsA"),
 	DescendantsOf = require("@src/Instances/DescendantsOf"),
+	BindProperty = require("@src/Instances/BindProperty"),
+	PropertyOf = require("@src/Instances/PropertyOf"),
 
+	-- Utility
 	extendedCleanup = require("@src/Utility/extendedCleanup"),
 
 	scopable = table.freeze {
+		-- Instances
 		Derive = require("@src/Instances/Derive"),
 
 		AncestorNamed = require("@src/Instances/AncestorNamed"),
 		AncestorOfClass = require("@src/Instances/AncestorOfClass"),
 		AncestorWhichIsA = require("@src/Instances/AncestorWhichIsA"),
 		AncestorsOf = require("@src/Instances/AncestorsOf"),
-		AttributesOf = require("@src/Instances/AttributesOf"),
 		AttributeNamed = require("@src/Instances/AttributeNamed"),
+		AttributesOf = require("@src/Instances/AttributesOf"),
 		BindAttribute = require("@src/Instances/BindAttribute"),
 		HasAttribute = require("@src/Instances/HasAttribute"),
+		ChildNamed = require("@src/Instances/ChildNamed"),
+		ChildOfClass = require("@src/Instances/ChildOfClass"),
+		ChildWhichIsA = require("@src/Instances/ChildWhichIsA"),
 		ChildrenOf = require("@src/Instances/ChildrenOf"),
+		DescendantNamed = require("@src/Instances/DescendantNamed"),
+		DescendantOfClass = require("@src/Instances/DescendantOfClass"),
+		DescendantWhichIsA = require("@src/Instances/DescendantWhichIsA"),
 		DescendantsOf = require("@src/Instances/DescendantsOf"),
+		BindProperty = require("@src/Instances/BindProperty"),
+		PropertyOf = require("@src/Instances/PropertyOf"),
 
+		-- State
 		Observe = require("@src/State/Observe"),
 		ObserveBind = require("@src/State/ObserveBind"),
 
+		-- Utility
 		expandedCleanup = require("@src/Utility/extendedCleanup"),
 	},
 

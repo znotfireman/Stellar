@@ -1,13 +1,14 @@
 --[[
-	A selector that returns the first ancestor of an instance that inherits from
+	A selector that returns the first child of an instance that is exactly
 	the given class name.
 ]]
 
+local Runtime = require("@src/Runtime")
 local Types = require("@src/Types")
 -- Utility
 local computeFromInstance = require("@src/Utility/computeFromInstance")
 
-local function AncestorWhichIsA(
+local function ChildOfClass(
 	scope: Types.Scope<any>,
 	instance: Types.UsedAs<Instance?>,
 	className: string
@@ -17,19 +18,15 @@ local function AncestorWhichIsA(
 		if not instance then
 			return nil
 		end
-		table.insert(scope, instance.AncestryChanged:Connect(refresh))
-		local ancestor = instance
-		while ancestor do
-			if not ancestor.Parent then
-				break
+		table.insert(scope, instance.ChildAdded:Connect(refresh))
+		table.insert(scope, instance.ChildRemoved:Connect(refresh))
+		for _, child in ipairs(instance:GetChildren()) do
+			if child.ClassName == className then
+				return child :: any
 			end
-			if ancestor:IsA(className) then
-				return ancestor :: any
-			end
-			ancestor = ancestor.Parent
 		end
 		return nil
 	end)
 end
 
-return AncestorWhichIsA
+return ChildOfClass

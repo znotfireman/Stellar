@@ -1,6 +1,6 @@
 --[[
-   Handles interaction with the Fusion library. Provides access to Fusion's
-   constructors and types, and manages initialization based on the environment.
+	Handles interaction with the Fusion library. Provides access to Fusion's
+	constructors and types, and manages initialization based on the environment.
 ]]
 
 local FusionTypes = require(script.Parent.FusionTypes)
@@ -133,8 +133,8 @@ function Fusion.hasInstallation(): boolean
 end
 
 setmetatable(Fusion, {
-	__index = function()
-		Runtime.throwError("noFusionInstallation")
+	__index = function(): never
+		return Runtime.throwError("noFusionInstallation")
 	end,
 })
 return (Fusion :: any) :: Types.Fusion & typeof(Fusion)

@@ -1,5 +1,6 @@
 --[[
-	A selector that returns the descendants of an instance.
+	A selector that returns the first descendant of an instance that matches
+	the given name.
 ]]
 
 local Runtime = require("@src/Runtime")
@@ -7,14 +8,15 @@ local Types = require("@src/Types")
 -- Utility
 local computeFromInstance = require("@src/Utility/computeFromInstance")
 
-local function DescendantsOf(
+local function DescendantNamed(
 	scope: Types.Scope<any>,
-	instance: Types.UsedAs<Instance?>
-): Types.StateObject<{ [number]: Instance }>
+	instance: Types.UsedAs<Instance?>,
+	name: string
+): Types.StateObject<Instance?>
 	return computeFromInstance(scope, function(use, scope, refresh)
 		local instance: Instance = use(instance)
 		if not instance then
-			return {}
+			return nil
 		end
 		table.insert(scope, instance.DescendantAdded:Connect(refresh))
 		table.insert(
@@ -23,8 +25,8 @@ local function DescendantsOf(
 				Runtime.deferTask(refresh)
 			end)
 		)
-		return instance:GetDescendants()
+		return instance:FindFirstChild(name, true) :: any
 	end)
 end
 
-return DescendantsOf
+return DescendantNamed

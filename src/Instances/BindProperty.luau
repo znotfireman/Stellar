@@ -1,7 +1,6 @@
 --[[
-   A special key allowing users to bulk-apply property tables. Aforementioned
-   property tables can be annotated with the [Default] key, which enables
-   overriding.
+	Binds a property to a instance. Returns a function to unbind the bounded
+	property.
 ]]
 
 local Fusion = require("@src/Fusion")
@@ -10,27 +9,10 @@ local Types = require("@src/Types")
 -- Logging
 local parseError = require("@src/Logging/parseError")
 -- State
+local Observe = require("@src/State/Observe")
 local castToState = require("@src/State/castToState")
 -- Utility
 local xtypeof = require("@src/Utility/xtypeof")
-
-type DefaultKey = {
-	type: "DefaultValue",
-	prop: string,
-}
-
-local Apply = {} :: Types.SpecialKey
-Apply.type = "SpecialKey"
-Apply.kind = "Stellar.Apply"
-Apply.stage = "self"
-
-local function castToDefaultKey(value: any): DefaultKey
-	return if typeof(value) == "table"
-			and value.type == "DefaultKey"
-			and typeof(value.prop) == "string"
-		then value
-		else nil
-end
 
 local function setProperty(instance: Instance, property: string, value: unknown)
 	(instance :: any)[property] = value
@@ -59,47 +41,53 @@ local function setInstanceProperty(instance: Instance, property: string, value: 
 end
 
 local function bindInstanceProperty(
-	scope: Types.Scope<unknown>,
+	scope: Types.Scope<any>,
 	instance: Instance,
 	property: string,
-	value: Types.UsedAs<unknown>
-)
+	value: Types.UsedAs<any>
+): (() -> ())?
 	if castToState(value) then
-		local value = value :: Types.StateObject<unknown>
-		Fusion.Observer(scope, value :: any):onBind(function()
+		local value = value :: Types.StateObject<any>
+		return Fusion.Observer(scope, value :: any):onBind(function()
 			setInstanceProperty(instance, property, Fusion.peek(value))
 		end)
-		return
 	end
 	setInstanceProperty(instance, property, value)
+	return nil
 end
 
-function Apply:apply(scope, value, instance)
-	if typeof(value) ~= "table" then
-		return Runtime.throwError("invalidApplyValue")
+local function BindProperty(
+	scope: Types.Scope<any>,
+	instance: Types.UsedAs<Instance?>,
+	propertyName: string,
+	value: Types.UsedAs<any>
+): () -> ()
+	if typeof(propertyName) ~= "string" then
+		Runtime.throwError("invalidPropertyName", nil, xtypeof(propertyName), "BindAttribute()")
 	end
-	local propertyTables = value :: { Types.PropertyTable }
-	local defaultProps: { [string]: true } = {}
-	for _, props in ipairs(propertyTables) do
-		if typeof(props) ~= "table" then
-			return Runtime.throwError("invalidApplyValue")
+	if typeof(instance) == "Instance" then
+		return Observe(scope, value, function()
+			instance:SetAttribute(propertyName, value)
+		end)
+	end
+	local disconnect: Types.Computed<() -> ()?> = Fusion.Computed(scope, function(use, scope)
+		local instance = use(instance)
+		if not instance then
+			return nil
 		end
-		for k, v in pairs(props) do
-			if typeof(k) == "string" then
-				if defaultProps[k] then
-					continue
-				end
-				bindInstanceProperty(scope, instance, k, v)
-			elseif castToDefaultKey(k) then
-				local k: DefaultKey = k :: any
-				local propertyName = string.sub(k.prop, 17, k.prop:len() - 1)
-				defaultProps[propertyName] = true
-				bindInstanceProperty(scope, instance, propertyName, v)
-			else
-				Runtime.throwError("unrecognizedApplyKey", nil, xtypeof(k))
-			end
+		return bindInstanceProperty(scope, instance, propertyName, value) :: any
+	end)
+	local connected = true
+	return function()
+		if not connected then
+			return Runtime.throwError("unbindedTwice", nil, "bounded property '" .. propertyName .. "'")
+		end
+		connected = false
+		local disconnect = Fusion.peek(disconnect)
+		if disconnect then
+			disconnect()
 		end
 	end
 end
 
-return Apply
+return BindProperty

@@ -2,7 +2,6 @@
 	A selector that returns if an instance has a specific attribute.
 ]]
 
-local Fusion = require("@src/Fusion")
 local Types = require("@src/Types")
 -- Utility
 local computeFromInstance = require("@src/Utility/computeFromInstance")

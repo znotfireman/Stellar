@@ -3,7 +3,6 @@
 	to furthest.
 ]]
 
-local Fusion = require("@src/Fusion")
 local Types = require("@src/Types")
 -- Utility
 local computeFromInstance = require("@src/Utility/computeFromInstance")

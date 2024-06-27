@@ -130,6 +130,13 @@ export type BindAttributeSelector = (
 	value: any
 ) -> () -> ()
 
+export type BindPropertySelector = (
+	scope: Scope<any>,
+	instance: UsedAs<Instance?>,
+	propertyName: string,
+	value: any
+) -> () -> ()
+
 export type ClassNameSelector = (
 	scope: Scope<any>,
 	instance: UsedAs<Instance>,
@@ -151,8 +158,8 @@ export type NameSelector = (scope: Scope<any>, instance: UsedAs<Instance>, name:
 
 export type PropertySelector = (
 	scope: Scope<any>,
-	instance: UsedAs<Instance>,
-	property: UsedAs<string>
+	instance: UsedAs<Instance?>,
+	propertyName: string
 ) -> StateObject<any>
 
 -- stylua: ignore
