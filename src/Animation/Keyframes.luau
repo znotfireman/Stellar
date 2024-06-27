@@ -29,8 +29,8 @@ end
 local function Keyframes<T>(
 	scope: Types.Scope<any>,
 	currentTime: Types.StateObject<number>,
-	keyframes: { [number]: T & Types.Animatable }
-): Types.StateObject<T & Types.Animatable>
+	keyframes: { [number]: T }
+): Types.StateObject<T>
 	if Runtime.isStrict() then
 		if not castToState(currentTime) then
 			Runtime.throwError("invalidStateObject", nil, xtypeof(currentTime), "Keyframes()")

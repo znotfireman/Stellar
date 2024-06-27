@@ -74,6 +74,8 @@ type Stellar = {
 
 	extendedCleanup: (...Task) -> (),
 
+	Keyframes: Types.KeyframesConstructor,
+
 	scopable: {
 		Freeze: Types.FreezeConstructor,
 		Observe: Types.ObserveConstructor,
@@ -104,6 +106,8 @@ type Stellar = {
 		PropertyOf: Types.PropertySelector,
 
 		expandedCleanup: (...Task) -> (),
+
+		Keyframes: Types.KeyframesConstructor,
 	},
 }
 
@@ -156,6 +160,9 @@ local Stellar: Stellar = table.freeze {
 	-- Utility
 	extendedCleanup = require("@src/Utility/extendedCleanup"),
 
+	-- Animation
+	Keyframes = require("@src/Animation/Keyframes"),
+
 	scopable = table.freeze {
 		-- State
 		Freeze = require("@src/State/Freeze"),
@@ -189,6 +196,9 @@ local Stellar: Stellar = table.freeze {
 
 		-- Utility
 		expandedCleanup = require("@src/Utility/extendedCleanup"),
+
+		-- Animation
+		Keyframes = require("@src/Animation/Keyframes"),
 	},
 
 	unstable = table.freeze({}),
