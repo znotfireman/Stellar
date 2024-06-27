@@ -11,11 +11,11 @@ local Types = require("@src/Types")
 local castToState = require("@src/State/castToState")
 
 local function flatten(target: Types.StateObject<any>, use: Types.Use?): any
-   local unwrap: Types.Use = use or Fusion.peek
-   while castToState(target) do
-      target = unwrap(target)
-   end
-   return target
+	local unwrap: Types.Use = use or Fusion.peek
+	while castToState(target) do
+		target = unwrap(target)
+	end
+	return target
 end
 
 return flatten

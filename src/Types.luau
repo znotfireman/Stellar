@@ -28,41 +28,41 @@ export type Value<T, S = T> = FusionTypes.Value<T, S>
 ]]
 
 export type Error = {
-   type: "Error",
-   raw: string,
-   message: string,
-   trace: string,
+	type: "Error",
+	raw: string,
+	message: string,
+	trace: string,
 }
 
 export type Result<T> = {
-   ok: true,
-   value: T,
+	ok: true,
+	value: T,
 } | {
-   ok: false,
-   reason: string,
+	ok: false,
+	reason: string,
 }
 
 export type RuntimeProvider = {
-   policies: {
-      allowWebLinks: boolean,
-   },
+	policies: {
+		allowWebLinks: boolean,
+	},
 
-   startScheduler: () -> (),
-   stopScheduler: () -> (),
+	startScheduler: () -> (),
+	stopScheduler: () -> (),
 
-   cancelTask: (job: thread) -> (),
-   deferTask: <A...>(job: (A...) -> () | thread, A...) -> thread,
-   delayTask: <A...>(delay: number, job: (A...) -> () | thread, A...) -> thread,
-   spawnTask: <A...>(job: (A...) -> () | thread, A...) -> thread,
+	cancelTask: (job: thread) -> (),
+	deferTask: <A...>(job: (A...) -> () | thread, A...) -> thread,
+	delayTask: <A...>(delay: number, job: (A...) -> () | thread, A...) -> thread,
+	spawnTask: <A...>(job: (A...) -> () | thread, A...) -> thread,
 
-   throwErrorNonFatal: (messageString: string) -> (),
-   throwWarning: (messageString: string) -> (),
+	throwErrorNonFatal: (messageString: string) -> (),
+	throwWarning: (messageString: string) -> (),
 }
 
 export type Version = {
-   major: number,
-   minor: number,
-   patch: number,
+	major: number,
+	minor: number,
+	patch: number,
 }
 
 -- stylua: ignore
@@ -85,15 +85,15 @@ export type Task = never
 ]]
 
 export type EventualConstructor<T, S> = (
-   scope: Scope<any> & S,
-   initialValue: T,
-   computation: (become: <T>(target: T) -> T, use: Use, scope: Scope<any> & S) -> T
+	scope: Scope<any> & S,
+	initialValue: T,
+	computation: (become: <T>(target: T) -> T, use: Use, scope: Scope<any> & S) -> T
 ) -> StateObject<T>
 
 export type ObserveConstructor = (
-   scope: Scope<any>,
-   watching: StateObject<any> | { StateObject<any> },
-   callback: () -> ()
+	scope: Scope<any>,
+	watching: StateObject<any> | { StateObject<any> },
+	callback: () -> ()
 ) -> () -> ()
 
 --[[
@@ -103,40 +103,40 @@ export type ObserveConstructor = (
 export type Child = Instance | StateObject<Child> | UnresolvedChild | { Child }
 
 export type UnresolvedChild = {
-   type: "UnresolvedChild",
-   mode: "WaitForChild" | "FindFirstChild",
-   name: string,
-   props: PropertyTable,
+	type: "UnresolvedChild",
+	mode: "WaitForChild" | "FindFirstChild",
+	name: string,
+	props: PropertyTable,
 }
 export type UnresolvedChildConstructor = (name: string) -> (properties: PropertyTable) -> UnresolvedChild
 
 export type AttributeSelector = (
-   scope: Scope<any>,
-   instance: UsedAs<Instance>,
-   attribute: UsedAs<string>
+	scope: Scope<any>,
+	instance: UsedAs<Instance>,
+	attribute: UsedAs<string>
 ) -> StateObject<any>
 
 export type ClassNameSelector = (
-   scope: Scope<any>,
-   instance: UsedAs<Instance>,
-   className: string
+	scope: Scope<any>,
+	instance: UsedAs<Instance>,
+	className: string
 ) -> StateObject<Instance?>
 
 export type InstancesSelector = (
-   scope: Scope<any>,
-   instance: UsedAs<Instance>
+	scope: Scope<any>,
+	instance: UsedAs<Instance>
 ) -> StateObject<{ [number]: Instance }>
 
 export type NameSelector = (
-   scope: Scope<any>,
-   instance: UsedAs<Instance>,
-   name: string
+	scope: Scope<any>,
+	instance: UsedAs<Instance>,
+	name: string
 ) -> StateObject<Instance?>
 
 export type PropertySelector = (
-   scope: Scope<any>,
-   instance: UsedAs<Instance>,
-   property: UsedAs<string>
+	scope: Scope<any>,
+	instance: UsedAs<Instance>,
+	property: UsedAs<string>
 ) -> StateObject<any>
 
 -- stylua: ignore

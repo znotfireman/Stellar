@@ -6,14 +6,14 @@
 local Types = require("@src/Types")
 
 local function WaitChild(name: string): (properties: Types.PropertyTable) -> Types.UnresolvedChild
-   return function(properties: Types.PropertyTable): Types.UnresolvedChild
-      return table.freeze {
-         type = "UnresolvedChild" :: "UnresolvedChild",
-         mode = "WaitForChild" :: "WaitForChild",
-         name = name,
-         props = properties,
-      }
-   end
+	return function(properties: Types.PropertyTable): Types.UnresolvedChild
+		return table.freeze {
+			type = "UnresolvedChild" :: "UnresolvedChild",
+			mode = "WaitForChild" :: "WaitForChild",
+			name = name,
+			props = properties,
+		}
+	end
 end
 
 return WaitChild

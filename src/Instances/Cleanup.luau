@@ -13,7 +13,7 @@ Cleanup.kind = "Stellar.Cleanup"
 Cleanup.stage = "observer"
 
 function Cleanup:apply(scope, value, instance)
-   table.insert(scope, value :: any)
+	table.insert(scope, value :: any)
 end
 
 return Cleanup

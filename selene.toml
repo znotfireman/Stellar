@@ -1,5 +1,5 @@
 std = "selene-requires"
 [lints]
-   global_usage = "allow"
-   must_use = "allow"
-   shadowing = "allow"
+	global_usage = "allow"
+	must_use = "allow"
+	shadowing = "allow"

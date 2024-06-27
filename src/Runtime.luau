@@ -23,97 +23,97 @@ local updateStepCallbacks: { [{}]: (now: number) -> () } = {}
 local timeCriticalThreads: { [thread]: boolean } = setmetatable({}, { __mode = "k" }) :: any
 
 function Runtime.isTimeCritical(): boolean
-   return timeCriticalThreads[coroutine.running()] == true
+	return timeCriticalThreads[coroutine.running()] == true
 end
 
 function Runtime.runTimeCritical<A..., R...>(callback: (A...) -> R..., ...: A...): R...
-   local thread = coroutine.create(callback)
-   timeCriticalThreads[thread] = true
-   local pack = table.pack(coroutine.resume(thread, ...))
-   if coroutine.status(thread) ~= "dead" then
-      Runtime.throwError("cannotYield", nil, "a time critical section of code")
-      Runtime.cancelTask(thread)
-   end
-   timeCriticalThreads[thread] = nil
-   return table.unpack(pack :: any, 1, pack.n)
+	local thread = coroutine.create(callback)
+	timeCriticalThreads[thread] = true
+	local pack = table.pack(coroutine.resume(thread, ...))
+	if coroutine.status(thread) ~= "dead" then
+		Runtime.throwError("cannotYield", nil, "a time critical section of code")
+		Runtime.cancelTask(thread)
+	end
+	timeCriticalThreads[thread] = nil
+	return table.unpack(pack :: any, 1, pack.n)
 end
 
 function Runtime.setProvider(newRuntime: Types.RuntimeProvider): Types.RuntimeProvider?
-   local oldRuntime = currentRuntime
-   if oldRuntime then
-      oldRuntime.stopScheduler()
-   end
-   currentRuntime = newRuntime
-   newRuntime.startScheduler()
-   return oldRuntime
+	local oldRuntime = currentRuntime
+	if oldRuntime then
+		oldRuntime.stopScheduler()
+	end
+	currentRuntime = newRuntime
+	newRuntime.startScheduler()
+	return oldRuntime
 end
 
 function Runtime.cancelTask(job: thread): ()
-   if not currentRuntime then
-      return Runtime.throwError("noRuntimeProvider")
-   end
-   currentRuntime.cancelTask(job)
+	if not currentRuntime then
+		return Runtime.throwError("noRuntimeProvider")
+	end
+	currentRuntime.cancelTask(job)
 end
 
 function Runtime.deferTask<A...>(job: (A...) -> () | thread, ...: A...): thread
-   if not currentRuntime then
-      return Runtime.throwError("noRuntimeProvider")
-   end
-   return currentRuntime.deferTask(job, ...)
+	if not currentRuntime then
+		return Runtime.throwError("noRuntimeProvider")
+	end
+	return currentRuntime.deferTask(job, ...)
 end
 
 function Runtime.delayTask<A...>(delay: number, job: (A...) -> () | thread, ...: A...): thread
-   if not currentRuntime then
-      return Runtime.throwError("noRuntimeProvider")
-   end
-   return currentRuntime.delayTask(delay, job, ...)
+	if not currentRuntime then
+		return Runtime.throwError("noRuntimeProvider")
+	end
+	return currentRuntime.delayTask(delay, job, ...)
 end
 
 function Runtime.spawnTask<A...>(job: (A...) -> () | thread, ...: A...): thread
-   if not currentRuntime then
-      return Runtime.throwError("noRuntimeProvider")
-   end
-   return currentRuntime.spawnTask(job, ...)
+	if not currentRuntime then
+		return Runtime.throwError("noRuntimeProvider")
+	end
+	return currentRuntime.spawnTask(job, ...)
 end
 
 function Runtime.throwError(messageId: string, errorObject: Types.Error?, ...: any): never
-   local message = formatError(currentRuntime, messageId, errorObject, ...)
-   error(message, 0)
+	local message = formatError(currentRuntime, messageId, errorObject, ...)
+	error(message, 0)
 end
 
 function Runtime.throwErrorNonFatal(messageId: string, errorObject: Types.Error?, ...: any)
-   local message = formatError(currentRuntime, messageId, errorObject, ...)
-   if not currentRuntime then
-      return print(message)
-   end
-   currentRuntime.throwErrorNonFatal(message)
+	local message = formatError(currentRuntime, messageId, errorObject, ...)
+	if not currentRuntime then
+		return print(message)
+	end
+	currentRuntime.throwErrorNonFatal(message)
 end
 
 function Runtime.throwWarning(messageId: string, ...: any)
-   local message = formatError(currentRuntime, messageId, nil, ...)
-   if not currentRuntime then
-      return print(message)
-   end
-   currentRuntime.throwWarning(message)
+	local message = formatError(currentRuntime, messageId, nil, ...)
+	if not currentRuntime then
+		return print(message)
+	end
+	currentRuntime.throwWarning(message)
 end
 
 function Runtime.onUpdateStep(callback: (now: number) -> ()): () -> ()
-   local identifier = {}
-   updateStepCallbacks[identifier] = callback
-   return function()
-      updateStepCallbacks[identifier] = nil
-   end
+	local identifier = {}
+	updateStepCallbacks[identifier] = callback
+	return function()
+		updateStepCallbacks[identifier] = nil
+	end
 end
 
 function Runtime.performUpdateStep(now: number)
-   lastUpdateStep = now
-   for _, callback in pairs(updateStepCallbacks) do
-      xpcall(callback, warn, now)
-   end
+	lastUpdateStep = now
+	for _, callback in pairs(updateStepCallbacks) do
+		xpcall(callback, warn, now)
+	end
 end
 
 function Runtime.lastUpdateStep(): number
-   return lastUpdateStep
+	return lastUpdateStep
 end
 
 table.freeze(Runtime)
