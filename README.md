@@ -1,4 +1,4 @@
-<img align="left" src="./gh-assets/logo-dark.svg#gh-dark-mode-only" alt="Stellar" width="200"><img align="left" src="./gh-assets/logo-light.svg#gh-light-mode-only" alt="Stellar" width="200">
+<img align="right" src="./gh-assets/logo-dark.svg#gh-dark-mode-only" alt="Stellar" width="200"><img align="right" src="./gh-assets/logo-light.svg#gh-light-mode-only" alt="Stellar" width="200">
 # Stellar
 **A radiant collection of Fusion v0.3 utilities.**
 
