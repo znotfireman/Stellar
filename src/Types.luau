@@ -75,6 +75,7 @@ export type Task = never
    | Instance
    | RBXScriptConnection
    | thread
+   | Scope<any>
    | (...any) -> ...any
    | { [unknown]: Task }
    | { destroy: (self: any) -> () }
@@ -83,7 +84,6 @@ export type Task = never
    | { Disconnect: (self: any) -> () }
    | { Connected: boolean, Disconnect: (self: any) -> () }
    | { getStatus: (self: any) -> string, cancel: (self: any) -> () }
-   | FusionTypes.Scope<any>
 
 --[[
 	State object related types
@@ -193,5 +193,15 @@ export type TagSelector = (
    scope: Scope<any>,
    instance: UsedAs<Instance>
 ) -> StateObject<{ string }>
+
+--[[
+	Animation related types
+]]
+
+export type KeyframesConstructor = <T>(
+	scope: Scope<any>,
+	currentTime: StateObject<number>,
+	keyframes: { [number]: T }
+) -> StateObject<T>
 
 return {}
