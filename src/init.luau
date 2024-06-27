@@ -170,7 +170,7 @@ local Stellar: Stellar = table.freeze {
 		ObserveBind = require("@src/State/ObserveBind"),
 		ReadOnly = require("@src/State/ReadOnly"),
 		Switch = require("@src/State/Switch"),
-		Toggle = require("@src/State/Toggle") :: Types.ToggleConstructor,
+		Toggle = require("@src/State/Toggle"),
 
 		-- Instances
 		Derive = require("@src/Instances/Derive"),
