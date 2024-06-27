@@ -5,13 +5,13 @@
 
 local Types = require("@src/Types")
 
-local function WithChild(name: string): (properties: Types.PropertyTable) -> Types.UnresolvedChild
-	return function(properties: Types.PropertyTable): Types.UnresolvedChild
+local function WithChild(childName: string): (propertyTable: Types.PropertyTable) -> Types.UnresolvedChild
+	return function(propertyTable: Types.PropertyTable): Types.UnresolvedChild
 		return table.freeze {
 			type = "UnresolvedChild" :: "UnresolvedChild",
 			mode = "FindFirstChild" :: "FindFirstChild",
-			name = name,
-			props = properties,
+			name = childName,
+			props = propertyTable,
 		}
 	end
 end

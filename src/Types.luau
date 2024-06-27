@@ -1,6 +1,6 @@
 --[[
-   Exports common type information for Stellar APIs as well reexports Fusion's
-   own types for reusage.
+	Exports common type information for Stellar APIs as well reexports Fusion's
+	own types for reusage.
 ]]
 
 local FusionTypes = require("@src/FusionTypes")
@@ -24,7 +24,7 @@ export type UsedAs<T> = FusionTypes.UsedAs<T>
 export type Value<T, S = T> = FusionTypes.Value<T, S>
 
 --[[
-   General use types
+	General use types
 ]]
 
 export type Error = {
@@ -102,19 +102,26 @@ export type ObserveConstructor = (
 
 export type Child = Instance | StateObject<Child> | UnresolvedChild | { Child }
 
+export type DefaultKeyConstructor = (propertyName: string) -> DefaultKey
+type DefaultKey = { type: "DefaultKey", prop: string }
+
+export type DeriveConstructor = <T>(scope: Scope<any>, template: T & Instance) -> (propertyTable: PropertyTable) -> T
+
 export type UnresolvedChild = {
 	type: "UnresolvedChild",
 	mode: "WaitForChild" | "FindFirstChild",
 	name: string,
 	props: PropertyTable,
 }
-export type UnresolvedChildConstructor = (name: string) -> (properties: PropertyTable) -> UnresolvedChild
+export type UnresolvedChildConstructor = (childName: string) -> (properties: PropertyTable) -> UnresolvedChild
 
 export type AttributeSelector = (
 	scope: Scope<any>,
 	instance: UsedAs<Instance>,
 	attribute: UsedAs<string>
 ) -> StateObject<any>
+
+export type AttributesSelector = (scope: Scope<any>, instance: UsedAs<Instance>) -> StateObject<{ [string]: any }>
 
 export type ClassNameSelector = (
 	scope: Scope<any>,

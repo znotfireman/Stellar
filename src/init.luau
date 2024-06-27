@@ -21,20 +21,22 @@ do
 	end
 end
 
--- Instances
+local AncestorsOf = require("@src/Instances/AncestorsOf")
 local Apply = require("@src/Instances/Apply")
+local AttributesOf = require("@src/Instances/AttributesOf")
 local BatchKeys = require("@src/Instances/BatchKeys")
 local Children = require("@src/Instances/Children")
+local ChildrenOf = require("@src/Instances/ChildrenOf")
 local Cleanup = require("@src/Instances/Cleanup")
 local Default = require("@src/Instances/Default")
-local WaitChild = require("@src/Instances/WaitChild")
-local WithChild = require("@src/Instances/WithChild")
--- State
+local Derive = require("@src/Instances/Derive")
+local DescendantsOf = require("@src/Instances/DescendantsOf")
 local Observe = require("@src/State/Observe")
 local ObserveBind = require("@src/State/ObserveBind")
-local flatten = require("@src/State/flatten")
--- Utility
+local WaitChild = require("@src/Instances/WaitChild")
+local WithChild = require("@src/Instances/WithChild")
 local extendedCleanup = require("@src/Utility/extendedCleanup")
+local flatten = require("@src/State/flatten")
 
 export type Child = Types.Child
 export type Result<T> = Types.Result<T>
@@ -56,15 +58,28 @@ type Stellar = {
 	BatchKeys: (stage: "self" | "ancestor" | "descendants" | "observer") -> Types.SpecialKey,
 	Children: Types.SpecialKey,
 	Cleanup: Types.SpecialKey,
-	Default: (name: string) -> { type: "DefaultKey", prop: string },
-	WaitChild: (name: string) -> (properties: Types.PropertyTable) -> UnresolvedChild,
-	WithChild: (name: string) -> (properties: Types.PropertyTable) -> UnresolvedChild,
+	Default: Types.DefaultKeyConstructor,
+	Derive: Types.DeriveConstructor,
+	WaitChild: Types.UnresolvedChildConstructor,
+	WithChild: Types.UnresolvedChildConstructor,
+
+	AncestorsOf: Types.InstancesSelector,
+	AttributesOf: Types.AttributesSelector,
+	ChildrenOf: Types.InstancesSelector,
+	DescendantsOf: Types.InstancesSelector,
 
 	extendedCleanup: (...Task) -> (),
 
 	scopable: {
 		Observe: Types.ObserveConstructor,
 		ObserveBind: Types.ObserveConstructor,
+
+		Derive: Types.DeriveConstructor,
+
+		AncestorsOf: Types.InstancesSelector,
+		AttributesOf: Types.AttributesSelector,
+		ChildrenOf: Types.InstancesSelector,
+		DescendantsOf: Types.InstancesSelector,
 
 		expandedCleanup: (...Task) -> (),
 	},
@@ -75,30 +90,38 @@ local Stellar: Stellar = table.freeze {
 	setInstallation = Fusion.setInstallation,
 	setProvider = Runtime.setProvider,
 
-	-- State
 	Observe = Observe,
 	ObserveBind = ObserveBind,
 	flatten = flatten,
 
-	-- Instance API
 	Apply = Apply,
 	BatchKeys = BatchKeys,
 	Children = Children,
 	Cleanup = Cleanup,
 	Default = Default,
+	Derive = Derive,
 	WaitChild = WaitChild,
 	WithChild = WithChild,
 
-	-- Utility
+	AncestorsOf = AncestorsOf,
+	AttributesOf = AttributesOf,
+	ChildrenOf = ChildrenOf,
+	DescendantsOf = DescendantsOf,
+
 	extendedCleanup = extendedCleanup,
 
 	-- Methods designed to use scoped() syntax
 	scopable = table.freeze {
-		-- State
+		Derive = Derive,
+
+		AncestorsOf = AncestorsOf,
+		AttributesOf = AttributesOf,
+		ChildrenOf = ChildrenOf,
+		DescendantsOf = DescendantsOf,
+
 		Observe = Observe,
 		ObserveBind = ObserveBind,
 
-		-- Utility
 		expandedCleanup = extendedCleanup,
 	},
 }

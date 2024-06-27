@@ -1,27 +1,25 @@
 --[[
-
+	Computes a value given an instance. Intended to be used by selectors.
 ]]
 
 local Fusion = require("@src/Fusion")
 local Runtime = require("@src/Runtime")
 local Types = require("@src/Types")
 
-local function computeFromInstance<Returns, Args...>(
+local function computeFromInstance<Returns>(
 	scope: Types.Scope<any>,
-	computation: (
+	process: (
+		use: Types.Use,
 		scope: Types.Scope<any>,
-		instance: Instance,
-		Args...
-	) -> Returns,
-	instance: Instance,
-	...: Args...
-): Types.UsedAs<Returns>
-	if typeof(instance) == "Instance" then
-		return computation(scope, instance, ...)
-	end
-	local arguments = table.pack(...)
+		refresh: () -> ()
+	) -> Returns
+): Types.StateObject<Returns>
+	local updater = Fusion.Value(nil)
 	local computed = Fusion.Computed(scope, function(use, scope)
-		return use(computation(scope, use(instance), table.unpack(arguments :: any)))
+		use(updater)
+		return process(use, scope, function()
+			updater:set(nil, true)
+		end)
 	end)
 	return computed
 end
