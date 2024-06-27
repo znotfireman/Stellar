@@ -118,16 +118,29 @@ export type UnresolvedChildConstructor = (childName: string) -> (properties: Pro
 export type AttributeSelector = (
 	scope: Scope<any>,
 	instance: UsedAs<Instance>,
-	attribute: UsedAs<string>
+	attributeName: string
 ) -> StateObject<any>
 
 export type AttributesSelector = (scope: Scope<any>, instance: UsedAs<Instance>) -> StateObject<{ [string]: any }>
+
+export type BindAttributeSelector = (
+	scope: Scope<any>,
+	instance: UsedAs<Instance?>,
+	attributeName: string,
+	value: any
+) -> () -> ()
 
 export type ClassNameSelector = (
 	scope: Scope<any>,
 	instance: UsedAs<Instance>,
 	className: string
 ) -> StateObject<Instance?>
+
+export type HasAttributeSelector = (
+	scope: Scope<any>,
+	instance: UsedAs<Instance>,
+	attributeName: string
+) -> StateObject<boolean>
 
 export type InstancesSelector = (
 	scope: Scope<any>,

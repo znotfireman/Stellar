@@ -23,8 +23,10 @@ end
 
 local AncestorsOf = require("@src/Instances/AncestorsOf")
 local Apply = require("@src/Instances/Apply")
+local AttributeNamed = require("@src/Instances/AttributeNamed")
 local AttributesOf = require("@src/Instances/AttributesOf")
 local BatchKeys = require("@src/Instances/BatchKeys")
+local BindAttribute = require("@src/Instances/BindAttribute")
 local Child = require("@src/Instances/Child")
 local Children = require("@src/Instances/Children")
 local ChildrenOf = require("@src/Instances/ChildrenOf")
@@ -32,6 +34,7 @@ local Cleanup = require("@src/Instances/Cleanup")
 local Default = require("@src/Instances/Default")
 local Derive = require("@src/Instances/Derive")
 local DescendantsOf = require("@src/Instances/DescendantsOf")
+local HasAttribute = require("@src/Instances/HasAttribute")
 local Observe = require("@src/State/Observe")
 local ObserveBind = require("@src/State/ObserveBind")
 local WaitChild = require("@src/Instances/WaitChild")
@@ -67,6 +70,9 @@ type Stellar = {
 
 	AncestorsOf: Types.InstancesSelector,
 	AttributesOf: Types.AttributesSelector,
+	AttributeNamed: Types.AttributeSelector,
+	BindAttribute: Types.BindAttributeSelector,
+	HasAttribute: Types.HasAttributeSelector,
 	ChildrenOf: Types.InstancesSelector,
 	DescendantsOf: Types.InstancesSelector,
 
@@ -80,6 +86,9 @@ type Stellar = {
 
 		AncestorsOf: Types.InstancesSelector,
 		AttributesOf: Types.AttributesSelector,
+		AttributeNamed: Types.AttributeSelector,
+		BindAttribute: Types.BindAttributeSelector,
+		HasAttribute: Types.HasAttributeSelector,
 		ChildrenOf: Types.InstancesSelector,
 		DescendantsOf: Types.InstancesSelector,
 
@@ -88,7 +97,7 @@ type Stellar = {
 }
 
 local Stellar: Stellar = table.freeze {
-	version = table.freeze { major = 0, minor = 1, patch = 0 },
+	version = { major = 0, minor = 1, patch = 0 },
 	setInstallation = Fusion.setInstallation,
 	setProvider = Runtime.setProvider,
 
@@ -108,6 +117,9 @@ local Stellar: Stellar = table.freeze {
 
 	AncestorsOf = AncestorsOf,
 	AttributesOf = AttributesOf,
+	AttributeNamed = AttributeNamed,
+	BindAttribute = BindAttribute,
+	HasAttribute = HasAttribute,
 	ChildrenOf = ChildrenOf,
 	DescendantsOf = DescendantsOf,
 
@@ -119,6 +131,9 @@ local Stellar: Stellar = table.freeze {
 
 		AncestorsOf = AncestorsOf,
 		AttributesOf = AttributesOf,
+		AttributeNamed = AttributeNamed,
+		BindAttribute = BindAttribute,
+		HasAttribute = HasAttribute,
 		ChildrenOf = ChildrenOf,
 		DescendantsOf = DescendantsOf,
 
@@ -128,3 +143,5 @@ local Stellar: Stellar = table.freeze {
 		expandedCleanup = extendedCleanup,
 	},
 }
+
+return Stellar

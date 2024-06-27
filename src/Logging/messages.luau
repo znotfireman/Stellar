@@ -9,6 +9,7 @@ return table.freeze {
 	childInfiniteYield = "Potential infinite yield for '%s' in '%s'. Check that you're hydrating an existing object.",
 	destroyedTwice = "`expandedCleanup()` was given something it was already cleaning up. Unclear how to proceed.",
 	invalidApplyValue = "[Apply] must be given an array of property tables",
+	invalidAttributeName = "'%s' type attribute names aren't accepted by `%s`.",
 	invalidFusionInstallation = "Stellar got invalid Fusion installation; %s.",
 	invalidPropertyType = "'%s.%s' expected a %s type, but got a '%s' type.",
 	invalidSpecialKey = "'%s' type special keys aren't accepted by `%s`",
