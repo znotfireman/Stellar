@@ -14,7 +14,7 @@ local function computeFromInstance<Returns>(
 		refresh: () -> ()
 	) -> Returns
 ): Types.StateObject<Returns>
-	local updater = Fusion.Value(nil)
+	local updater = Fusion.Value(scope, nil)
 	local computed = Fusion.Computed(scope, function(use, scope)
 		use(updater)
 		return process(use, scope, function()

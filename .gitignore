@@ -24,7 +24,7 @@ desktop.ini
 # Ignore selene auto-generated config
 roblox.toml
 
-# Luau
+# Ignore Luau
 sourcemap*.json
 globalTypes.d.luau
 /*.d.luau

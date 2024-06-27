@@ -3,6 +3,7 @@
    constructors and types, and manages initialization based on the environment.
 ]]
 
+local FusionTypes = require(script.Parent.FusionTypes)
 local Runtime = require("@src/Runtime")
 local Types = require("@src/Types")
 -- Logging
@@ -91,11 +92,11 @@ function Fusion.setInstallation(newInstallation: Types.Fusion): Types.Result<Typ
 	currentInstallation = newInstallation
 	if oldInstallation then
 		for key in pairs(oldInstallation) do
-			Fusion[key] = nil
+			rawset(Fusion, key, nil)
 		end
 	end
 	for key, value in pairs(newInstallation) do
-		Fusion[key] = value
+		rawset(Fusion, key, value)
 	end
 	return Result.ok(oldInstallation)
 end
@@ -131,4 +132,9 @@ function Fusion.hasInstallation(): boolean
 	return currentInstallation ~= nil
 end
 
+setmetatable(Fusion, {
+	__index = function()
+		Runtime.throwError("noFusionInstallation")
+	end,
+})
 return (Fusion :: any) :: Types.Fusion & typeof(Fusion)

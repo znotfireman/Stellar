@@ -1,5 +1,6 @@
 --[[
-   Entry point for the Stellar library.
+	Packages up the internal of Stellar and exposes an API for it. Connects to
+	Fusion if it finds one.
 ]]
 
 local Fusion = require("@src/Fusion")
@@ -11,36 +12,11 @@ do
 	-- is compiled for.
 	local RobloxRuntime = require("@src/RobloxRuntime")
 	Runtime.setProvider(RobloxRuntime)
-
 	local result = Fusion.setInstallation(Fusion.findInstallation("roblox") :: any)
 	if not result.ok then
 		Runtime.throwError("invalidFusionInstallation", nil, result.reason)
 	end
-	if not Fusion.hasInstallation() then
-		Runtime.throwError("noFusionInstallation")
-	end
 end
-
-local AncestorsOf = require("@src/Instances/AncestorsOf")
-local Apply = require("@src/Instances/Apply")
-local AttributeNamed = require("@src/Instances/AttributeNamed")
-local AttributesOf = require("@src/Instances/AttributesOf")
-local BatchKeys = require("@src/Instances/BatchKeys")
-local BindAttribute = require("@src/Instances/BindAttribute")
-local Child = require("@src/Instances/Child")
-local Children = require("@src/Instances/Children")
-local ChildrenOf = require("@src/Instances/ChildrenOf")
-local Cleanup = require("@src/Instances/Cleanup")
-local Default = require("@src/Instances/Default")
-local Derive = require("@src/Instances/Derive")
-local DescendantsOf = require("@src/Instances/DescendantsOf")
-local HasAttribute = require("@src/Instances/HasAttribute")
-local Observe = require("@src/State/Observe")
-local ObserveBind = require("@src/State/ObserveBind")
-local WaitChild = require("@src/Instances/WaitChild")
-local WithChild = require("@src/Instances/WithChild")
-local extendedCleanup = require("@src/Utility/extendedCleanup")
-local flatten = require("@src/State/flatten")
 
 export type Child = Types.Child
 export type Result<T> = Types.Result<T>
@@ -68,6 +44,9 @@ type Stellar = {
 	WaitChild: Types.UnresolvedChildConstructor,
 	WithChild: Types.UnresolvedChildConstructor,
 
+	AncestorNamed: Types.NameSelector,
+	AncestorOfClass: Types.ClassNameSelector,
+	AncestorWhichIsA: Types.ClassNameSelector,
 	AncestorsOf: Types.InstancesSelector,
 	AttributesOf: Types.AttributesSelector,
 	AttributeNamed: Types.AttributeSelector,
@@ -84,6 +63,9 @@ type Stellar = {
 
 		Derive: Types.DeriveConstructor,
 
+		AncestorNamed: Types.NameSelector,
+		AncestorOfClass: Types.ClassNameSelector,
+		AncestorWhichIsA: Types.ClassNameSelector,
 		AncestorsOf: Types.InstancesSelector,
 		AttributesOf: Types.AttributesSelector,
 		AttributeNamed: Types.AttributeSelector,
@@ -101,47 +83,54 @@ local Stellar: Stellar = table.freeze {
 	setInstallation = Fusion.setInstallation,
 	setProvider = Runtime.setProvider,
 
-	Observe = Observe,
-	ObserveBind = ObserveBind,
-	flatten = flatten,
+	Observe = require("@src/State/Observe"),
+	ObserveBind = require("@src/State/ObserveBind"),
+	flatten = require("@src/State/flatten"),
 
-	Apply = Apply,
-	BatchKeys = BatchKeys,
-	Child = Child,
-	Children = Children,
-	Cleanup = Cleanup,
-	Default = Default,
-	Derive = Derive,
-	WaitChild = WaitChild,
-	WithChild = WithChild,
+	Apply = require("@src/Instances/Apply"),
+	BatchKeys = require("@src/Instances/BatchKeys"),
+	Child = require("@src/Instances/Child"),
+	Children = require("@src/Instances/Children"),
+	Cleanup = require("@src/Instances/Cleanup"),
+	Default = require("@src/Instances/Default"),
+	Derive = require("@src/Instances/Derive"),
+	WaitChild = require("@src/Instances/WaitChild"),
+	WithChild = require("@src/Instances/WithChild"),
 
-	AncestorsOf = AncestorsOf,
-	AttributesOf = AttributesOf,
-	AttributeNamed = AttributeNamed,
-	BindAttribute = BindAttribute,
-	HasAttribute = HasAttribute,
-	ChildrenOf = ChildrenOf,
-	DescendantsOf = DescendantsOf,
+	AncestorNamed = require("@src/Instances/AncestorNamed"),
+	AncestorOfClass = require("@src/Instances/AncestorOfClass"),
+	AncestorWhichIsA = require("@src/Instances/AncestorWhichIsA"),
+	AncestorsOf = require("@src/Instances/AncestorsOf"),
+	AttributesOf = require("@src/Instances/AttributesOf"),
+	AttributeNamed = require("@src/Instances/AttributeNamed"),
+	BindAttribute = require("@src/Instances/BindAttribute"),
+	HasAttribute = require("@src/Instances/HasAttribute"),
+	ChildrenOf = require("@src/Instances/ChildrenOf"),
+	DescendantsOf = require("@src/Instances/DescendantsOf"),
 
-	extendedCleanup = extendedCleanup,
+	extendedCleanup = require("@src/Utility/extendedCleanup"),
 
-	-- Methods designed to use scoped() syntax
 	scopable = table.freeze {
-		Derive = Derive,
+		Derive = require("@src/Instances/Derive"),
 
-		AncestorsOf = AncestorsOf,
-		AttributesOf = AttributesOf,
-		AttributeNamed = AttributeNamed,
-		BindAttribute = BindAttribute,
-		HasAttribute = HasAttribute,
-		ChildrenOf = ChildrenOf,
-		DescendantsOf = DescendantsOf,
+		AncestorNamed = require("@src/Instances/AncestorNamed"),
+		AncestorOfClass = require("@src/Instances/AncestorOfClass"),
+		AncestorWhichIsA = require("@src/Instances/AncestorWhichIsA"),
+		AncestorsOf = require("@src/Instances/AncestorsOf"),
+		AttributesOf = require("@src/Instances/AttributesOf"),
+		AttributeNamed = require("@src/Instances/AttributeNamed"),
+		BindAttribute = require("@src/Instances/BindAttribute"),
+		HasAttribute = require("@src/Instances/HasAttribute"),
+		ChildrenOf = require("@src/Instances/ChildrenOf"),
+		DescendantsOf = require("@src/Instances/DescendantsOf"),
 
-		Observe = Observe,
-		ObserveBind = ObserveBind,
+		Observe = require("@src/State/Observe"),
+		ObserveBind = require("@src/State/ObserveBind"),
 
-		expandedCleanup = extendedCleanup,
+		expandedCleanup = require("@src/Utility/extendedCleanup"),
 	},
+
+	unstable = table.freeze({}),
 }
 
 return Stellar

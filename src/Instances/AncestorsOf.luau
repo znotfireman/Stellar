@@ -14,12 +14,12 @@ local function AncestorsOf(
 ): Types.StateObject<{ [number]: Instance }>
 	return computeFromInstance(scope, function(use, scope, refresh)
 		local instance: Instance = use(instance)
+		table.insert(scope, instance.AncestryChanged:Connect(refresh))
 		local ancestry, ancestor: Instance? = {}, instance
 		while ancestor do
 			ancestor = ancestor.Parent
 			table.insert(ancestry, ancestor)
 		end
-		table.insert(scope, instance.AncestryChanged:Connect(refresh))
 		return ancestry
 	end)
 end
