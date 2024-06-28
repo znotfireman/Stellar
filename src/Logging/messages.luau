@@ -23,6 +23,8 @@ return table.freeze {
 	noFusionInstallation = "Stellar requires a Fusion installation to be present as a sibling in the data model.",
 	noRuntimeProvider = "Stellar requires a runtime provider to function. Set one via `Stellar.setProvider()`.",
 	propertySetError = "Error setting property: ERROR_MESSAGE",
+	strictReadError = "'%s' is not a valid member of %s.",
+	strictWriteError = "Attempted to write to %s.",
 	unbindedTwice = "Attempted to unbind twice from %s.",
 	unknownMessage = "Unknown error: ERROR_MESSAGE",
 	unrecognizedApplyKey = "'%s' type property keys aren't accepted by [Apply]",

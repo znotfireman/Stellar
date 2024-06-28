@@ -1,10 +1,14 @@
+--[[
+	Exports symbollic values to be used by Stellar.
+]]
+
 local Runtime = require("@src/Runtime")
 local Types = require("@src/Types")
 
 local function symbol(kind: string): Types.Symbol
 	return setmetatable({}, {
 		__index = function(_: any, key: any): any
-			if key == "string" then
+			if key == "type" then
 				return "Symbol"
 			elseif key == "kind" then
 				return kind
@@ -22,6 +26,11 @@ local function symbol(kind: string): Types.Symbol
 end
 
 local Symbols = {}
+
+-- Represents a value that is intentionally present, but should be interpreted
+-- as `nil`. Included to make removing values more ergonomic.
+local none = symbol("None") :: any
+Symbols.None = none :: { type: "Symbol", kind: "None" }
 
 -- Used in `Switch()` to indicate a default value.
 local switchDefault = symbol("SwitchDefault") :: any
