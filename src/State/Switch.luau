@@ -21,13 +21,13 @@ local function Switch<Options, Result>(
 	target: Types.StateObject<Options>,
 	options: { [Options | typeof(SWITCH_DEFAULT)]: () -> Result }
 ): Types.StateObject<Result>
+	if not castToState(target) then
+		Runtime.throwError("invalidStateObject", nil, xtypeof(target), "Switch()")
+	end
+	if typeof(options) ~= "table" then
+		Runtime.throwError("invalidSwitchOptions", nil, xtypeof(options), "Switch()")
+	end
 	if Runtime.isStrict() then
-		if not castToState(target) then
-			Runtime.throwError("invalidStateObject", nil, xtypeof(target), "Switch()")
-		end
-		if typeof(options) ~= "table" then
-			Runtime.throwError("invalidSwitchOptions", nil, xtypeof(options), "Switch()")
-		end
 		for k, v in pairs(options) do
 			if typeof(v) ~= "function" then
 				Runtime.throwError("invalidSwitchOption", nil, tostring(k), xtypeof(v))

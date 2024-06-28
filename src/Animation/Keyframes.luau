@@ -7,24 +7,11 @@ local Fusion = require("@src/Fusion")
 local Runtime = require("@src/Runtime")
 local Types = require("@src/Types")
 -- Animation
-local Oklab = require("@src/Animation/Oklab")
 local lerpType = require("@src/Animation/lerpType")
 -- State
-local ObserveBind = require("@src/State/ObserveBind")
 local castToState = require("@src/State/castToState")
 -- Utility
 local xtypeof = require("@src/Utility/xtypeof")
-
-local function nearestPair(table: { number }, number: number): (number, number)
-	local smallestSoFar: number?, smallestIndex: number = nil, table[1]
-	for i, v in ipairs(table) do
-		if not smallestSoFar or (math.abs(number - v) < smallestSoFar) then
-			smallestSoFar = math.abs(number - v)
-			smallestIndex = i
-		end
-	end
-	return smallestIndex, table[smallestIndex]
-end
 
 local function Keyframes<T>(
 	scope: Types.Scope<any>,

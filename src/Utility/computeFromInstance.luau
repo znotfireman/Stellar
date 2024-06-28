@@ -3,7 +3,6 @@
 ]]
 
 local Fusion = require("@src/Fusion")
-local Runtime = require("@src/Runtime")
 local Types = require("@src/Types")
 
 local function computeFromInstance<Returns>(
@@ -14,11 +13,11 @@ local function computeFromInstance<Returns>(
 		refresh: () -> ()
 	) -> Returns
 ): Types.StateObject<Returns>
-	local updater = Fusion.Value(scope, nil)
+	local updater = Fusion.Value(scope, os.clock())
 	local computed = Fusion.Computed(scope, function(use, scope)
 		use(updater)
 		return process(use, scope, function()
-			updater:set(nil, true)
+			updater:set(os.clock())
 		end)
 	end)
 	return computed

@@ -1,6 +1,6 @@
 --[[
-   Extended `typeof()`. If given an object with a type string field, returns
-   that. Otherwise, returns the `typeof()` of said object.
+	Extended `typeof()`. If given an object with a type string field, returns
+	that. Otherwise, returns the `typeof()` of said object.
 ]]
 
 local function xtypeof(value: any): string

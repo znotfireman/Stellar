@@ -16,15 +16,10 @@ local xtypeof = require("@src/Utility/xtypeof")
 local function Freeze<T>(
 	scope: Types.Scope<any>,
 	target: Types.StateObject<T>,
-	isFrozen: Types.StateObject<boolean>
+	isFrozen: Types.UsedAs<boolean>
 ): Types.StateObject<T>
-	if Runtime.isStrict() then
-		if not castToState(target) then
-			Runtime.throwError("invalidStateObject", nil, xtypeof(target), "Freeze()")
-		end
-		if not castToState(isFrozen) then
-			Runtime.throwError("invalidStateObject", nil, xtypeof(isFrozen), "Freeze()")
-		end
+	if not castToState(target) then
+		Runtime.throwError("invalidStateObject", nil, xtypeof(target), "Freeze()")
 	end
 	local lastValue = Fusion.peek(target)
 	local frozen = Fusion.Computed(scope, function(use)

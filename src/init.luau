@@ -5,8 +5,9 @@
 
 local Fusion = require("@src/Fusion")
 local Runtime = require("@src/Runtime")
-local Symbols = require("@src/Utility/Symbols")
 local Types = require("@src/Types")
+-- Utillity
+local restrictRead = require("@src/Utility/restrictRead")
 
 do
 	-- Down the line, this will be conditional based on what runtime Stellar is
@@ -43,6 +44,7 @@ type Stellar = {
 	ObserveBind: Types.ObserveConstructor,
 	ReadOnly: <T>(scope: Types.Scope<any>, target: Types.StateObject<T>) -> Types.StateObject<T>,
 	Switch: Types.SwitchConstructor,
+	SwitchDefault: Types.Symbol<"SwitchDefault">,
 	Toggle: Types.ToggleConstructor,
 	flatten: (target: Types.UsedAs<any>, use: Types.Use?) -> any,
 
@@ -111,7 +113,7 @@ type Stellar = {
 	},
 }
 
-local Stellar: Stellar = table.freeze {
+local Stellar: Stellar = restrictRead("Stellar", {
 	-- General
 	version = { major = 0, minor = 1, patch = 0 },
 	setInstallation = Fusion.setInstallation,
@@ -124,6 +126,7 @@ local Stellar: Stellar = table.freeze {
 	ObserveBind = require("@src/State/ObserveBind"),
 	ReadOnly = require("@src/State/ReadOnly"),
 	Switch = require("@src/State/Switch"),
+	SwitchDefault = require("@src/Utility/Symbols").SwitchDefault,
 	Toggle = require("@src/State/Toggle"),
 	flatten = require("@src/State/flatten"),
 
@@ -163,7 +166,7 @@ local Stellar: Stellar = table.freeze {
 	-- Animation
 	Keyframes = require("@src/Animation/Keyframes"),
 
-	scopable = table.freeze {
+	scopable = {
 		-- State
 		Freeze = require("@src/State/Freeze"),
 		Observe = require("@src/State/Observe"),
@@ -202,6 +205,6 @@ local Stellar: Stellar = table.freeze {
 	},
 
 	unstable = table.freeze({}),
-}
+})
 
 return Stellar

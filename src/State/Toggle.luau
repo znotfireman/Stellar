@@ -20,19 +20,17 @@ local function Toggle<Default, Fallback>(
 		fallback: (() -> Fallback)?,
 	}
 ): Types.StateObject<Default | Fallback>
-	if Runtime.isStrict() then
-		if not castToState(target) then
-			Runtime.throwError("invalidStateObject", nil, xtypeof(target), "Toggle()")
-		end
-		if typeof(options) ~= "table" then
-			Runtime.throwError("invalidSwitchOptions", nil, xtypeof(options), "Switch()")
-		end
-		if typeof(options.show) ~= "function" then
-			Runtime.throwError("invalidSwitchOption", nil, "show", xtypeof(options.show))
-		end
-		if options.fallback ~= nil and typeof(options.fallback) ~= "function" then
-			Runtime.throwError("invalidSwitchOption", nil, "fallback", xtypeof(options.show))
-		end
+	if not castToState(target) then
+		Runtime.throwError("invalidStateObject", nil, xtypeof(target), "Toggle()")
+	end
+	if typeof(options) ~= "table" then
+		Runtime.throwError("invalidSwitchOptions", nil, xtypeof(options), "Switch()")
+	end
+	if typeof(options.show) ~= "function" then
+		Runtime.throwError("invalidSwitchOption", nil, "show", xtypeof(options.show))
+	end
+	if options.fallback ~= nil and typeof(options.fallback) ~= "function" then
+		Runtime.throwError("invalidSwitchOption", nil, "fallback", xtypeof(options.show))
 	end
 	local truthy = Fusion.Computed(scope, function(use)
 		return not not use(target)

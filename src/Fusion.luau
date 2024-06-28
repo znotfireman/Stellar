@@ -3,7 +3,6 @@
 	constructors and types, and manages initialization based on the environment.
 ]]
 
-local FusionTypes = require(script.Parent.FusionTypes)
 local Runtime = require("@src/Runtime")
 local Types = require("@src/Types")
 -- Logging

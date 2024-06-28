@@ -1,6 +1,6 @@
 --[[
-   Constructs Observers watching state objects, returns a callback to unbind
-   aforementioned Observers. Also runs the callback immediately.
+	Constructs Observers watching state objects, returns a callback to unbind
+	aforementioned Observers. Also runs the callback immediately.
 ]]
 
 local Fusion = require("@src/Fusion")

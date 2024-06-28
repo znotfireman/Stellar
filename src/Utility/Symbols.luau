@@ -5,7 +5,7 @@
 local Runtime = require("@src/Runtime")
 local Types = require("@src/Types")
 
-local function symbol(kind: string): Types.Symbol
+local function symbol<Kind>(kind: string & Kind): Types.Symbol<Kind>
 	return setmetatable({}, {
 		__index = function(_: any, key: any): any
 			if key == "type" then
@@ -30,11 +30,11 @@ local Symbols = {}
 -- Represents a value that is intentionally present, but should be interpreted
 -- as `nil`. Included to make removing values more ergonomic.
 local none = symbol("None") :: any
-Symbols.None = none :: { type: "Symbol", kind: "None" }
+Symbols.None = none :: Types.Symbol<"None">
 
 -- Used in `Switch()` to indicate a default value.
 local switchDefault = symbol("SwitchDefault") :: any
-Symbols.SwitchDefault = switchDefault :: { type: "Symbol", kind: "SwitchDefault" }
+Symbols.SwitchDefault = switchDefault :: Types.Symbol<"SwitchDefault">
 
 table.freeze(Symbols)
 return Symbols

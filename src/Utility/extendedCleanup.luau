@@ -1,6 +1,7 @@
+--!strict
 --[[
-   Extended `doCleanup()`, also accepts signal-like objects, promises, threads
-   and objects with disconnect methods.
+	Extended `doCleanup()`, also accepts signal-like objects, promises, threads
+	and objects with disconnect methods.
 ]]
 
 local Fusion = require("@src/Fusion")

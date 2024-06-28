@@ -59,9 +59,9 @@ export type RuntimeProvider = {
 	throwWarning: (messageString: string) -> (),
 }
 
-export type Symbol = {
+export type Symbol<kind = string> = {
 	type: "Symbol",
-	kind: string,
+	kind: kind,
 }
 
 export type Version = {
