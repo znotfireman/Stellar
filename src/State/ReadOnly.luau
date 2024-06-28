@@ -12,10 +12,8 @@ local castToState = require("@src/State/castToState")
 local xtypeof = require("@src/Utility/xtypeof")
 
 local function ReadOnly<T>(scope: Types.Scope<any>, target: Types.StateObject<T>): Types.StateObject<T>
-	if Runtime.isStrict() then
-		if not castToState(target) then
-			Runtime.throwError("invalidStateObject", nil, xtypeof(target), "ReadOnly()")
-		end
+	if not castToState(target) then
+		Runtime.throwError("invalidStateObject", nil, xtypeof(target), "ReadOnly()")
 	end
 	return Fusion.Computed(scope, function(use)
 		return use(target)
