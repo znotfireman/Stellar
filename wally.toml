@@ -1,0 +1,14 @@
+[package]
+	name = "znotfireman/stellar"
+	description = "A radiant collection of Fusion v0.3 utilities."
+	license = "MIT"
+	authors = ["ImNotFireMan123"]
+	version = "0.3.0-dev.2"
+
+	registry = "https://github.com/UpliftGames/wally-index"
+	realm = "shared"
+
+	exclude = ["**"]
+	include = ["src", "src/*", "default.project.json", "wally.lock", "wally.toml"]
+
+[dependencies]

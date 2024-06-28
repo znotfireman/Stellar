@@ -10,6 +10,9 @@
 	width="200">
 
 # Stellar
+
+[![Build status](https://github.com/znotfireman/Stellar/workflows/CI/badge.svg)](https://znotfireman/Stellar/actions)
+
 **A radiant collection of Fusion v0.3 utilities.**
 
 Stellar is a collection of utilities that extend the Fusion reactive state
@@ -47,6 +50,4 @@ local label = scope:Derive (ReplicatedStorage.TemplateBtn) {
 }
 ```
 
-## Crash Course
-
-tba
+## Installation
