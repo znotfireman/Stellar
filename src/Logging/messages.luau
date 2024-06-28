@@ -4,6 +4,7 @@
 
 return table.freeze {
 	cannotAssignProperty = "The class type '%s' has no assignable property '%s'.",
+	cannotDerive = "Attempted to derive from a non-archivable instance.",
 	cannotFindUnresolvedChild = "Cannot find child named '%s' within '%s'. Check that you're hydrating an existing object.",
 	cannotYield = "Yielding not allowed during %s. Restructure your code to avoid yielding here.",
 	childInfiniteYield = "Potential infinite yield for '%s' in '%s'. Check that you're hydrating an existing object.",
