@@ -40,6 +40,7 @@ type Stellar = {
 	setProvider: (newProvider: RuntimeProvider) -> RuntimeProvider?,
 	setStrictMode: (newValue: boolean) -> (),
 
+	Eventual: Types.EventualConstructor,
 	Freeze: Types.FreezeConstructor,
 	Observe: Types.ObserveConstructor,
 	ObserveBind: Types.ObserveConstructor,
@@ -80,6 +81,7 @@ type Stellar = {
 	Keyframes: Types.KeyframesConstructor,
 
 	scopable: {
+		Eventual: Types.EventualConstructor,
 		Freeze: Types.FreezeConstructor,
 		Observe: Types.ObserveConstructor,
 		ObserveBind: Types.ObserveConstructor,
@@ -122,6 +124,7 @@ local Stellar: Stellar = restrictRead("Stellar", {
 	setStrictMode = Runtime.setStrictMode,
 
 	-- State
+	Eventual = require("@src/State/Eventual"),
 	Freeze = require("@src/State/Freeze"),
 	Observe = require("@src/State/Observe"),
 	ObserveBind = require("@src/State/ObserveBind"),
@@ -169,6 +172,7 @@ local Stellar: Stellar = restrictRead("Stellar", {
 
 	scopable = {
 		-- State
+		Eventual = require("@src/State/Eventual"),
 		Freeze = require("@src/State/Freeze"),
 		Observe = require("@src/State/Observe"),
 		ObserveBind = require("@src/State/ObserveBind"),
