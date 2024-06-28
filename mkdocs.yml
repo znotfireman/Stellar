@@ -1,7 +1,0 @@
-site_name: Stellar
-site_url: https://znotfireman.github.io/stellar/
-theme:
-    name: material
-extra:
-    version:
-        provider: mike
