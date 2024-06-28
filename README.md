@@ -11,7 +11,7 @@
 
 # Stellar
 
-[![Build status](https://github.com/znotfireman/Stellar/workflows/CI/badge.svg)](https://znotfireman/Stellar/actions)
+[![Build status](https://github.com/znotfireman/Stellar/workflows/CI/badge.svg)](https://github.com/znotfireman/Stellar/actions)
 
 **A radiant collection of Fusion v0.3 utilities.**
 
