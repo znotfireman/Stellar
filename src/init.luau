@@ -29,6 +29,7 @@ end
 export type Child = Types.Child
 export type Result<T> = Types.Result<T>
 export type RuntimeProvider = Types.RuntimeProvider
+export type Symbol = Types.Symbol<string>
 export type Task = Types.Task
 export type UnresolvedChild = Types.UnresolvedChild
 export type Version = Types.Version

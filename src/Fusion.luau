@@ -111,6 +111,9 @@ function Fusion.findInstallation(mode: "roblox" | "lune"): Types.Fusion?
 			end
 			ancestor = ancestor.Parent
 		end
+		if not fusion then
+			return nil
+		end
 		local ok, exports = xpcall(require, parseError, fusion)
 		if not ok then
 			Runtime.throwError("invalidFusionInstallation", exports, "failed to require, ERROR_MESSAGE")

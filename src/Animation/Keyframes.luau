@@ -15,46 +15,46 @@ local xtypeof = require("@src/Utility/xtypeof")
 
 local function Keyframes<T>(
 	scope: Types.Scope<any>,
-	currentTime: Types.StateObject<number>,
-	keyframes: { [number]: T }
-): Types.StateObject<T>
-	if Runtime.isStrict() then
+	currentTime: Types.StateObject<number>
+): (keyframes: { [number]: T }) -> Types.StateObject<T>
+	return function(keyframes: { [number]: T }): Types.StateObject<T>
 		if not castToState(currentTime) then
 			Runtime.throwError("invalidStateObject", nil, xtypeof(currentTime), "Keyframes()")
 		end
 		if typeof(keyframes) ~= "table" then
 			Runtime.throwError("invalidKeyframesType", nil, xtypeof(keyframes))
 		end
-	end
-	local timeframes: { number } = {}
-	for time in pairs(keyframes) do
-		table.insert(timeframes, time)
-	end
-	table.sort(timeframes)
-	local startpoint, endpoint = timeframes[1], timeframes[#timeframes]
 
-	return Fusion.Computed(scope, function(use): any
-		local currentTime = use(currentTime)
-		if typeof(currentTime) ~= "number" then
-			Runtime.throwErrorNonFatal("invalidCurrentTime", nil, xtypeof(keyframes))
-			currentTime = startpoint
+		local timeframes: { number } = {}
+		for time in pairs(keyframes) do
+			table.insert(timeframes, time)
 		end
-		currentTime = math.clamp(currentTime, startpoint, endpoint)
+		table.sort(timeframes)
+		local startpoint, endpoint = timeframes[1], timeframes[#timeframes]
 
-		if currentTime <= startpoint then
-			return keyframes[startpoint]
-		elseif currentTime >= endpoint then
-			return keyframes[endpoint]
-		end
-		for index, time in pairs(timeframes) do
-			if currentTime <= time then
-				local next = timeframes[index + 1]
-				local alpha = time / next
-				return lerpType(keyframes[time], keyframes[next], alpha)
+		return Fusion.Computed(scope, function(use): any
+			local currentTime = use(currentTime)
+			if typeof(currentTime) ~= "number" then
+				Runtime.throwErrorNonFatal("invalidCurrentTime", nil, xtypeof(keyframes))
+				currentTime = startpoint
 			end
-		end
-		return keyframes[endpoint]
-	end)
+			currentTime = math.clamp(currentTime, startpoint, endpoint)
+
+			if currentTime <= startpoint then
+				return keyframes[startpoint]
+			elseif currentTime >= endpoint then
+				return keyframes[endpoint]
+			end
+			for index, time in pairs(timeframes) do
+				if currentTime <= time then
+					local next = timeframes[index + 1]
+					local alpha = time / next
+					return lerpType(keyframes[time], keyframes[next], alpha)
+				end
+			end
+			return keyframes[endpoint]
+		end)
+	end
 end
 
 return Keyframes

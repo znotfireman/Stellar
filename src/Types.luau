@@ -200,8 +200,7 @@ export type TagSelector = (
 
 export type KeyframesConstructor = <T>(
 	scope: Scope<any>,
-	currentTime: StateObject<number>,
-	keyframes: { [number]: T }
-) -> StateObject<T>
+	currentTime: StateObject<number>
+) -> (keyframes: { [number]: T }) -> StateObject<T>
 
 return {}
