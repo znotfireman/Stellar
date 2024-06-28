@@ -61,7 +61,7 @@ local function castToFusion(value: any): Types.Result<Types.Fusion>
 	if typeof(value) ~= "table" then
 		return Result.err("expected a table of exports")
 	end
-	local exports = value :: Types.Fusion
+	local exports = value :: { [any]: any }
 	local version = exports.version
 	if typeof(version) ~= "table" then
 		return Result.err("malformed Fusion version")
