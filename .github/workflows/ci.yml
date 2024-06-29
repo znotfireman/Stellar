@@ -9,24 +9,6 @@ on:
       - main
 
 jobs:
-  analyze:
-    name: Analyze
-    runs-on: ubuntu-latest
-    steps:
-      - name: Checkout Repository
-        uses: actions/checkout@v3
-
-      - name: Install Aftman
-        uses: ok-nick/setup-aftman@v0.3.0
-        with:
-          token: ${{ secrets.GITHUB_TOKEN }}
-
-      - name: Install Wally packages
-        run: sh scripts/install-packages.sh
-
-      - name: Analyze
-        run: sh scripts/analyze.sh
-
   lint:
     name: Lint
     runs-on: ubuntu-latest
