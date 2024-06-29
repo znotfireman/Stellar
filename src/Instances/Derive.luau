@@ -10,12 +10,12 @@ local Types = require("@src/Types")
 
 local function Derive<T>(scope: Types.Scope<any>, template: T & Instance): (propertyTable: Types.PropertyTable) -> T
 	return function(propertyTable: Types.PropertyTable): T
-		local clone = template:Clone()
+		local _, clone = pcall(template.Clone, template)
 		if not clone then
 			Runtime.throwError("cannotDerive")
 		end
 		Fusion.Hydrate(scope, template)(propertyTable)
-		return clone
+		return clone :: any
 	end
 end
 
