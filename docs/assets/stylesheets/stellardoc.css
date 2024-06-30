@@ -174,6 +174,38 @@
 /*
  * GENERAL
  */
+
+.md-sidebar__scrollwrap:focus-within,
+.md-sidebar__scrollwrap:hover {
+	scrollbar-color: var(--md-default-fg-color--lightest) #0000;
+}
+
+.md-top {
+	background-color: var(--md-default-fg-color);
+	border-radius: 6px;
+	box-shadow: var(--md-shadow-z2);
+	color: var(--md-default-bg-color);
+	font-weight: 600;
+	cursor: pointer;
+	display: block;
+	font-size: .7rem;
+	outline: none;
+	padding: .4rem .8rem;
+	position: fixed;
+	top: 3.2rem;
+	transform: translate(-50%);
+	transition: color 125ms, background-color 125ms, transform 125ms cubic-bezier(.4, 0, .2, 1), opacity 125ms;
+	z-index: 2;
+}
+
+.md-copyright::after {
+	content: "· Theme by znotfireman";
+}
+
+/*
+ * TYPESET
+ */
+
 .md-typeset code,
 .md-typeset kbd,
 .md-typeset pre {
@@ -210,39 +242,6 @@
 	left: 0.5em;
 }
 
-.md-sidebar__scrollwrap:focus-within,
-.md-sidebar__scrollwrap:hover {
-	scrollbar-color: var(--md-default-fg-color--lightest) #0000;
-}
-
-.md-tabs,
-.md-header {
-	background-color: var(--md-default-bg-color);
-	color: var(--md-default-fg-color);
-}
-
-.md-top {
-	background-color: var(--md-default-fg-color);
-	border-radius: 6px;
-	box-shadow: var(--md-shadow-z2);
-	color: var(--md-default-bg-color);
-	font-weight: 600;
-	cursor: pointer;
-	display: block;
-	font-size: .7rem;
-	outline: none;
-	padding: .4rem .8rem;
-	position: fixed;
-	top: 3.2rem;
-	transform: translate(-50%);
-	transition: color 125ms, background-color 125ms, transform 125ms cubic-bezier(.4, 0, .2, 1), opacity 125ms;
-	z-index: 2;
-}
-
-.md-copyright::after {
-	content: "· Theme by znotfireman";
-}
-
 .md-typeset .md-button {
 	background-color: var(--md-default-fg-color);
 	border-radius: 6px;
@@ -251,6 +250,20 @@
 	font-weight: 500;
 	margin-right: 0.5em;
 	padding: 0.25em 1em;
+}
+
+/*
+ * HEADER
+ */
+.md-header--shadow {
+	box-shadow: 0 0 .2rem var(--md-default-bg-color--lightest), 0 .2rem .4rem var(--md-default-bg-color);
+	transition: transform .25s cubic-bezier(.1, .7, .1, 1), box-shadow .25s;
+}
+
+.md-tabs,
+.md-header {
+	background-color: var(--md-default-bg-color);
+	color: var(--md-default-fg-color);
 }
 
 /*
