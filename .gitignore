@@ -28,3 +28,6 @@ roblox.toml
 sourcemap*.json
 globalTypes.d.luau
 /*.d.luau
+
+# Ignore mike site files
+site/
