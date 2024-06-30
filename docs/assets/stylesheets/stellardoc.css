@@ -200,6 +200,16 @@
 	color: var(--md-default-fg-color--light);
 }
 
+.md-typeset a>.stellardoc-link-chevron {
+	position: relative;
+	left: 0;
+	transition: left 0.2s ease, bottom 0.2s ease;
+}
+
+.md-typeset a:hover>.stellardoc-link-chevron {
+	left: 0.5em;
+}
+
 .md-sidebar__scrollwrap:focus-within,
 .md-sidebar__scrollwrap:hover {
 	scrollbar-color: var(--md-default-fg-color--lightest) #0000;

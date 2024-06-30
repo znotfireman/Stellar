@@ -13,41 +13,32 @@
 
 [![Build status](https://github.com/znotfireman/Stellar/workflows/CI/badge.svg)](https://github.com/znotfireman/Stellar/actions)
 
-***The* radiant collection of Fusion v0.3 utilities.**
+# The radiant set of utilities for [Fusion](https://elttob.uk/Fusion/0.3/).
 
-Stellar is a collection of utilities that extend the Fusion reactive state
+Stellar is a collection of utilities that extends the Fusion reactive state
 library, implementing common conventions that builds upon Fusion's strengths,
 making it a breeze to write declarative user interface.
 
 It's dead easy to get started:
 
 ```lua
-local Fusion = require("@pkg/Fusion")
-local Stellar = require("@pkg/Stellar")
+local Fusion = require(ReplicatedStorage.Fusion)
+local Stellar = require(ReplicatedStorage.Stellar)
 
--- Stellar is designed to be usable with scoped() syntax
+local Children = Stellar.Children
+local extendedCleanup = Stellar.extendedCleanup
+
 local scope = Fusion:scoped(Stellar.scopable)
 
--- All of Fusion constructors are still exposed
-local compliment = scope:Value("very awesome")
-local message = scope:Computed(function(use, scope)
-   return "betcha stellar is " .. use(compliment)
-end)
-
--- Stellar's own constructors are exposed too!
-local Children, Child, WithChild, = Stellar.Children, Stellar.Child, Stellar.WithChild
-local label = scope:Derive (ReplicatedStorage.TemplateBtn) {
+local message = scope:Value("Hello, Stellar!")
+scope:Derive(ReplicatedStorage.TemplateButton) {
     Text = message,
-    [Children] = Child {
-        WithChild "UIStroke" {
-            Color = scope:Eventual(Color3.new(1, 0, 0), function(become, use, scope)
-                become(Color3.new(1, 0, 0))
-                task.wait(5) -- very expensive computation
-                return Color3.new(0, 1, 0)
-            end)
-        }
+    [Children] = WithChild "UIStroke" {
+        Color = Color3.new(1, 0, 0)
     }
 }
+scope:ObserveBind(message, print)
+extendedCleanup(scope)
 ```
 
 ## Installation

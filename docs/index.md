@@ -18,7 +18,10 @@ Stellar is a collection of utilities that extends the Fusion reactive state
 library, implementing common conventions that builds upon Fusion's strengths,
 making it a breeze to write declarative user interface.
 
-[It's dead easy to get started.](./tutorials/index.md){ .md-button .md-button-primary }
+<a href="./tutorials" markdown>
+It's dead easy to get started.
+<span class="stellardoc-link-chevron">:octicons-chevron-right-24:</span>
+</a>
 
 </div>
 
