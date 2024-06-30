@@ -1,0 +1,399 @@
+/*
+ * COLORS
+ */
+
+:root {
+	--stellardoc-gray-00: hsl(260, 50%, 5%);
+	--stellardoc-gray-01: hsl(260, 50%, 10%);
+	--stellardoc-gray-02: hsl(260, 40%, 15%);
+	--stellardoc-gray-03: hsl(260, 40%, 30%);
+	--stellardoc-gray-04: hsl(260, 30%, 40%);
+	--stellardoc-gray-05: hsl(260, 30%, 50%);
+	--stellardoc-gray-06: hsl(260, 20%, 60%);
+	--stellardoc-gray-07: hsl(260, 20%, 70%);
+	--stellardoc-gray-08: hsl(260, 20%, 80%);
+	--stellardoc-gray-09: hsl(260, 20%, 90%);
+	--stellardoc-gray-10: hsl(260, 20%, 100%);
+
+	--stellardoc-gray-a1: hsl(260, 20%, 90%, 0.7);
+	--stellardoc-gray-a2: hsl(260, 20%, 90%, 0.3);
+	--stellardoc-gray-a3: hsl(260, 20%, 90%, 0.12);
+	--stellardoc-gray-a4: hsla(260, 50%, 10%, 0.7);
+	--stellardoc-gray-a5: hsla(260, 50%, 10%, 0.3);
+	--stellardoc-gray-a6: hsla(260, 50%, 10%, 0.12);
+
+	--stellardoc-orange: hsl(40, 100%, 50%);
+	--stellardoc-orange-a1: hsla(40, 100%, 50%, 0.7);
+	--stellardoc-orange-a2: hsla(40, 100%, 50%, 0.3);
+	--stellardoc-orange-a3: hsla(40, 100%, 50%, 0.12);
+	--stellardoc-orange--dark: hsl(40, 100%, 40%);
+	--stellardoc-orange--darker: hsl(40, 100%, 30%);
+	--stellardoc-orange--darkest: hsl(40, 100%, 20%);
+	--stellardoc-orange--light: hsl(40, 100%, 60%);
+	--stellardoc-orange--lighter: hsl(40, 100%, 70%);
+	--stellardoc-orange--lightest: hsl(40, 100%, 80%);
+
+	--stellardoc-magenta: hsl(320, 100%, 50%);
+	--stellardoc-magenta-a1: hsla(320, 100%, 50%, 0.7);
+	--stellardoc-magenta-a2: hsla(320, 100%, 50%, 0.3);
+	--stellardoc-magenta-a3: hsla(320, 100%, 50%, 0.12);
+	--stellardoc-magenta--dark: hsl(320, 100%, 40%);
+	--stellardoc-magenta--darker: hsl(320, 100%, 30%);
+	--stellardoc-magenta--darkest: hsl(320, 100%, 20%);
+	--stellardoc-magenta--light: hsl(320, 100%, 60%);
+	--stellardoc-magenta--lighter: hsl(320, 100%, 60%);
+	--stellardoc-magenta--lightest: hsl(320, 100%, 60%);
+}
+
+[data-md-color-scheme="stellardoc-dark"] {
+	--md-accent-fg-color: var(--stellardoc-orange);
+	--md-accent-fg-color--transparent: var(--stellardoc-orange-a1);
+	--md-accent-bg-color: var(--stellardoc-gray-01);
+	--md-accent-bg-color--light: var(--stellardoc-gray-a4);
+
+	--md-primary-fg-color: var(--stellardoc-orange);
+	--md-primary-fg-color--light: var(--stellardoc-orange--light);
+	--md-primary-fg-color--dark: var(--stellardoc-orange--dark);
+
+	--md-default-fg-color: var(--stellardoc-gray-09);
+	--md-default-fg-color--light: var(--stellardoc-gray-a1);
+	--md-default-fg-color--lighter: var(--stellardoc-gray-a2);
+	--md-default-fg-color--lightest: var(--stellardoc-gray-a3);
+	--md-default-bg-color: var(--stellardoc-gray-01);
+	--md-default-bg-color--light: var(--stellardoc-gray-a4);
+	--md-default-bg-color--lighter: var(--stellardoc-gray-a5);
+	--md-default-bg-color--lightest: var(--stellardoc-gray-a6);
+
+	--md-code-fg-color: var(--stellardoc-gray-09);
+	--md-code-bg-color: var(--stellardoc-gray-02);
+
+	--md-code-hl-color: var(--stellardoc-orange);
+	--md-code-hl-color--light: var(--stellardoc-orange-a3);
+
+	--md-typeset-color: var(--stellardoc-gray-09);
+	--md-typeset-a-color: var(--stellardoc-orange);
+
+	--md-code-hl-number-color: hsl(40, 75%, 60%);
+	--md-code-hl-special-color: hsl(290, 60%, 70%);
+	--md-code-hl-function-color: var(--stellardoc-grey-07);
+	--md-code-hl-constant-color: var(--stellardoc-gray-07);
+	--md-code-hl-keyword-color: hsl(40, 75%, 60%);
+	--md-code-hl-string-color: hsl(330, 80%, 70%);
+	--md-code-hl-name-color: var(--stellardoc-gray-09);
+	--md-code-hl-operator-color: var(--stellardoc-gray-06);
+	--md-code-hl-punctuation-color: var(--stellardoc-gray-06);
+	--md-code-hl-comment-color: var(--stellardoc-gray-06);
+	--md-code-hl-generic-color: var(--stellardoc-gray-06);
+	--md-code-hl-variable-color: var(--stellardoc-gray-06);
+
+	--md-typeset-del-color: var(--stellardoc-magenta-a3);
+	--md-typeset-ins-color: var(--stellardoc-orange-a3);
+
+	--md-typeset-kbd-color: var(--stellardoc-gray-01);
+	--md-typeset-kbd-accent-color: var(--stellardoc-gray-01);
+	--md-typeset-kbd-border-color: var(--stellardoc-gray-02);
+
+	--md-typeset-mark-color: var(--stellardoc-orange-a1);
+
+	--md-typeset-table-color: var(--stellardoc-gray-08);
+	--md-typeset-table-color--light: var(--stellardoc-gray-06);
+
+	--md-admonition-fg-color: var(--stellardoc-gray-08);
+	--md-admonition-bg-color: var(--stellardoc-gray-01);
+
+	--md-footer-fg-color: var(--stellardoc-gray-08);
+	--md-footer-fg-color--light: var(--stellardoc-gray-a1);
+	--md-footer-fg-color--lighter: var(--stellardoc-gray-a2);
+	--md-footer-bg-color: var(--stellardoc-gray-01);
+	--md-footer-bg-color--dark: var(--stellardoc-gray-01);
+}
+
+[data-md-color-scheme="stellardoc-light"] {
+	--md-accent-fg-color: var(--stellardoc-orange);
+	--md-accent-fg-color--transparent: var(--stellardoc-orange-a1);
+	--md-accent-bg-color: var(--stellardoc-gray-08);
+	--md-accent-bg-color--light: var(--stellardoc-gray-a1);
+
+	--md-primary-fg-color: var(--stellardoc-orange);
+	--md-primary-fg-color--light: var(--stellardoc-orange--dark);
+	--md-primary-fg-color--dark: var(--stellardoc-orange--light);
+
+	--md-default-fg-color: var(--stellardoc-gray-01);
+	--md-default-fg-color--light: var(--stellardoc-gray-a4);
+	--md-default-fg-color--lighter: var(--stellardoc-gray-a5);
+	--md-default-fg-color--lightest: var(--stellardoc-gray-a6);
+	--md-default-bg-color: var(--stellardoc-gray-09);
+	--md-default-bg-color--light: var(--stellardoc-gray-a1);
+	--md-default-bg-color--lighter: var(--stellardoc-gray-a2);
+	--md-default-bg-color--lightest: var(--stellardoc-gray-a3);
+
+	--md-code-fg-color: var(--stellardoc-gray-09);
+	--md-code-bg-color: var(--stellardoc-gray-02);
+
+	--md-code-hl-color: var(--stellardoc-orange);
+	--md-code-hl-color--light: var(--stellardoc-orange-a3);
+
+	--md-typeset-color: var(--stellardoc-gray-01);
+	--md-typeset-a-color: var(--stellardoc-orange);
+
+	--md-code-hl-number-color: hsl(40, 75%, 60%);
+	--md-code-hl-special-color: hsl(290, 60%, 70%);
+	--md-code-hl-function-color: var(--stellardoc-grey-07);
+	--md-code-hl-constant-color: var(--stellardoc-gray-07);
+	--md-code-hl-keyword-color: hsl(40, 75%, 60%);
+	--md-code-hl-string-color: hsl(330, 80%, 70%);
+	--md-code-hl-name-color: var(--stellardoc-gray-09);
+	--md-code-hl-operator-color: var(--stellardoc-gray-06);
+	--md-code-hl-punctuation-color: var(--stellardoc-gray-06);
+	--md-code-hl-comment-color: var(--stellardoc-gray-06);
+	--md-code-hl-generic-color: var(--stellardoc-gray-06);
+	--md-code-hl-variable-color: var(--stellardoc-gray-06);
+
+	--md-typeset-del-color: var(--stellardoc-magenta-a3);
+	--md-typeset-ins-color: var(--stellardoc-orange-a3);
+
+	--md-typeset-kbd-color: var(--stellardoc-gray-01);
+	--md-typeset-kbd-accent-color: var(--stellardoc-gray-09);
+	--md-typeset-kbd-border-color: var(--stellardoc-gray-08);
+
+	--md-typeset-mark-color: var(--stellardoc-orange-a1);
+
+	--md-typeset-table-color: var(--stellardoc-gray-02);
+	--md-typeset-table-color--light: var(--stellardoc-gray-04);
+
+	--md-admonition-fg-color: var(--stellardoc-gray-01);
+	--md-admonition-bg-color: var(--stellardoc-gray-09);
+
+	--md-footer-fg-color: var(--stellardoc-gray-01);
+	--md-footer-fg-color--light: var(--stellardoc-gray-a4);
+	--md-footer-fg-color--lighter: var(--stellardoc-gray-a5);
+	--md-footer-bg-color: var(--stellardoc-gray-09);
+	--md-footer-bg-color--dark: var(--stellardoc-gray-09);
+}
+
+/*
+ * GENERAL
+ */
+.md-typeset code,
+.md-typeset kbd,
+.md-typeset pre {
+	font-feature-settings: "kern", "liga";
+	font-variant-ligatures: normal;
+}
+
+.md-typeset h1 {
+	color: var(--md-default-fg-color);
+	font-size: 2em;
+	line-height: 1.3;
+	margin: 0 0 1em;
+}
+
+.md-typeset h1,
+.md-typeset h2,
+.md-typeset h3,
+.md-header .md-ellipsis {
+	font-weight: bold;
+}
+
+.md-typeset a:focus,
+.md-typeset a:hover {
+	color: var(--md-default-fg-color--light);
+}
+
+.md-sidebar__scrollwrap:focus-within,
+.md-sidebar__scrollwrap:hover {
+	scrollbar-color: var(--md-default-fg-color--lightest) #0000;
+}
+
+.md-tabs,
+.md-header {
+	background-color: var(--md-default-bg-color);
+	color: var(--md-default-fg-color);
+}
+
+.md-top {
+	background-color: var(--md-default-fg-color);
+	border-radius: 6px;
+	box-shadow: var(--md-shadow-z2);
+	color: var(--md-default-bg-color);
+	font-weight: 600;
+	cursor: pointer;
+	display: block;
+	font-size: .7rem;
+	outline: none;
+	padding: .4rem .8rem;
+	position: fixed;
+	top: 3.2rem;
+	transform: translate(-50%);
+	transition: color 125ms, background-color 125ms, transform 125ms cubic-bezier(.4, 0, .2, 1), opacity 125ms;
+	z-index: 2;
+}
+
+.md-copyright::after {
+	content: "· Theme by znotfireman";
+}
+
+.md-typeset .md-button {
+	background-color: var(--md-default-fg-color);
+	border-radius: 6px;
+	border: none;
+	color: var(--md-default-bg-color);
+	font-weight: 500;
+	margin-right: 0.5em;
+	padding: 0.25em 1em;
+}
+
+/*
+ * HOME
+ */
+
+.stellardoc-home-hero {
+	padding: 0 0 2em 0;
+	position: relative;
+}
+
+/* css sucks i cant center a div bruh */
+.stellardoc-home-hero::before {
+	background-image: url(./../images/hero-stars.svg);
+	background-position: bottom;
+	background-repeat: no-repeat;
+	background-size: 100vw;
+	border-bottom: 1px var(--md-default-fg-color--lightest) solid;
+	bottom: 0;
+	content: "";
+	display: block;
+	height: 100%;
+	left: 50%;
+	margin-left: -50vw;
+	opacity: 20%;
+	position: absolute;
+	width: 100vw;
+}
+
+.stellardoc-home-hero-inner {
+	backdrop-filter: blur(0.5em);
+	background-color: var(--md-default-bg-color--light);
+	border-radius: 6px;
+	margin: 2em auto;
+	padding: 2em;
+}
+
+@media only screen and (min-width: 120ch) {
+	.stellardoc-home-hero-inner {
+		display: grid;
+		font-size: 1.25em;
+		gap: 2em !important;
+		grid-column-gap: 0px;
+		grid-row-gap: 0px;
+		grid-template-columns: repeat(2, 1fr);
+		grid-template-rows: 1fr;
+		max-width: 80ch;
+	}
+}
+
+/*
+ *  NAVBAR
+ */
+.md-header__button.md-logo {
+	height: 100%;
+	margin: 0 0 0 1em;
+	padding: 0;
+}
+
+.md-header__button.md-logo>img {
+	height: 3em;
+}
+
+/*
+ *  API REFERENCE
+ */
+
+.stellardoc-api-section-arrow {
+	margin-left: 0.5em;
+	transition: margin-left 0.2s ease;
+}
+
+.stellardoc-api-section>p>a {
+	align-items: baseline;
+	color: var(--md-default-fg-color);
+	display: flex;
+	flex-wrap: wrap;
+	margin: 0 !important;
+}
+
+.stellardoc-api-section>p>a>* {
+	flex-shrink: 0;
+}
+
+.stellardoc-api-section>p>a>.stellardoc-api-icon {
+	margin-right: 0.25em;
+}
+
+.stellardoc-api-section>p>a:hover>.stellardoc-api-section-arrow {
+	margin-left: 0.75em;
+}
+
+.stellardoc-api-breadcrumbs {
+	padding-bottom: 0.25em;
+}
+
+.stellardoc-api-breadcrumbs>a {
+	color: var(--md-default-fg-color);
+	opacity: 70%;
+}
+
+.stellardoc-api-breadcrumbs>a::after {
+	color: var(--md-default-fg-color--light);
+	content: "/";
+	display: inline;
+	opacity: 70%;
+	padding-left: 0.1em;
+}
+
+.stellardoc-api-header {
+	align-items: baseline;
+	display: flex;
+	flex-wrap: wrap;
+	margin: 0 !important;
+}
+
+.stellardoc-api-header>* {
+	flex-shrink: 0;
+}
+
+.stellardoc-api-header .stellardoc-api-icon {
+	margin-right: 0.5em;
+}
+
+.stellardoc-api-tags {
+	align-content: space-around;
+	align-items: baseline;
+	display: flex;
+	flex-wrap: wrap;
+	float: right;
+	height: 2.6em;
+	gap: 0.5em;
+}
+
+.stellardoc-api-tags>span {
+	color: var(--md-accent-fg-color);
+	height: 2.6em;
+	line-height: 2.6;
+	padding: 0 1em;
+	position: relative;
+	vertical-align: middle;
+}
+
+.stellardoc-api-tags>span::before {
+	background-color: var(--md-accent-fg-color);
+	border-radius: 1.3em;
+	content: "";
+	display: block;
+	height: 100%;
+	line-height: 2.6;
+	opacity: 25%;
+	padding: 0 1em;
+	position: absolute;
+	right: 0;
+	width: 100%;
+}

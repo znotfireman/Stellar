@@ -13,7 +13,7 @@
 
 [![Build status](https://github.com/znotfireman/Stellar/workflows/CI/badge.svg)](https://github.com/znotfireman/Stellar/actions)
 
-**A radiant collection of Fusion v0.3 utilities.**
+***The* radiant collection of Fusion v0.3 utilities.**
 
 Stellar is a collection of utilities that extend the Fusion reactive state
 library, implementing common conventions that builds upon Fusion's strengths,

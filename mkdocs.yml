@@ -1,0 +1,142 @@
+site_name: Stellar
+site_url: https://znotfireman.github.io/Stellar
+repo_url: https://github.com/znotfireman/Stellar
+
+nav:
+  - Home: index.md
+  - Tutorials:
+      - tutorials/index.md
+      - Installing Stellar: tutorials/installing-stellar.md
+      - Using Stellar: tutorials/using-stellar.md
+      - State Objects:
+          - Eventuals: tutorials/state-objects/eventuals.md
+          - Switches: tutorials/state-objects/switches.md
+          - Toggles: tutorials/state-objects/toggles.md
+          - Observing States: tutorials/state-objects/observing-states.md
+          - Freezing States: tutorials/state-objects/freezing-states.md
+          - Restricting States: tutorials/state-objects/restricting-states.md
+          - Flatten: tutorials/state-objects/flatten.md
+      - Instances:
+          - Bulk Applying Properties: tutorials/instances/bulk-applying-props.md
+          - Deriving Instances: tutorials/instances/deriving-instances.md
+          - Child Hydration: tutorials/instances/child-hydration.md
+          - Selectors: tutorials/instances/selectors.md
+          - Cleanup: tutorials/instances/cleanup.md
+          - Methods: tutorials/instances/methods.md
+          - Batching Keys: tutorials/instances/batching-keys.md
+      - Animation:
+          - Impulses: tutorials/animation/impulses.md
+          - Keyframes: tutorials/animation/keyframes.md
+  - API Reference:
+      - api-reference/index.md
+      - General:
+          - Errors: api-reference/general/errors.md
+          - Members:
+              - extendedCleanup: api-reference/general/members/extendedCleanup.md
+          - Types:
+              - Symbol: api-reference/general/types/symbol.md
+              - Task: api-reference/general/types/task.md
+      - State Objects:
+          - api-reference/state-objects/index.md
+          - Members:
+              - api-reference/state-objects/members/index.md
+              - Eventual: api-reference/state-objects/members/eventual.md
+              - flatten: api-reference/state-objects/members/flatten.md
+              - Freeze: api-reference/state-objects/members/freeze.md
+              - Observe: api-reference/state-objects/members/observe.md
+              - ObserveBind: api-reference/state-objects/members/observe-bind.md
+              - ReadOnly: api-reference/state-objects/members/read-only.md
+              - Switch: api-reference/state-objects/members/switch.md
+              - Toggle: api-reference/state-objects/members/toggle.md
+
+extra:
+  version:
+    provider: mike
+
+extra_css:
+  - assets/stylesheets/stellardoc.css
+
+plugins:
+  - mike:
+      alias_type: symlink
+      redirect_template: null
+      deploy_prefix: ""
+      canonical_version: null
+      version_selector: true
+      css_dir: css
+      javascript_dir: js
+  - tags
+
+theme:
+  favicon: assets/images/favicon.png
+  logo: assets/images/logo.svg
+  icon:
+    admonition:
+      note: octicons/tag-16
+      abstract: octicons/checklist-16
+      info: octicons/info-16
+      tip: octicons/squirrel-16
+      success: octicons/check-16
+      question: octicons/question-16
+      warning: octicons/alert-16
+      failure: octicons/x-circle-16
+      danger: octicons/zap-16
+      bug: octicons/bug-16
+      example: octicons/beaker-16
+      quote: octicons/quote-16
+    repo: fontawesome/brands/github
+  name: material
+  custom_dir: docs/assets/overrides
+  font:
+    text: Plus Jakarta Sans
+    code: JetBrains Mono
+  palette:
+    - media: "(prefers-color-scheme: light)"
+      scheme: stellardoc-light
+      toggle:
+        icon: octicons/moon-24
+        name: Switch to dark mode
+    - media: "(prefers-color-scheme: dark)"
+      scheme: stellardoc-dark
+      toggle:
+        icon: octicons/sun-24
+        name: Switch to light mode
+  features:
+    - content.code.copy
+    - navigation.expand
+    - navigation.indexes
+    - navigation.instant
+    - navigation.instant.progress
+    - navigation.path
+    - navigation.sections
+    - navigation.tabs
+    - navigation.top
+    - search.highlight
+    - search.share
+    - search.suggest
+  language: en
+
+markdown_extensions:
+  - admonition
+  - attr_list
+  - md_in_html
+  - pymdownx.details
+  - pymdownx.emoji:
+      emoji_index: !!python/name:material.extensions.emoji.twemoji
+      emoji_generator: !!python/name:material.extensions.emoji.to_svg
+      options:
+        custom_icons:
+          - docs/assets/overrides/.icons
+  - pymdownx.highlight:
+      anchor_linenums: true
+      line_spans: __span
+      pygments_lang_class: true
+  - pymdownx.tabbed:
+      alternate_style: true
+  - pymdownx.inlinehilite
+  - pymdownx.snippets
+  - pymdownx.superfences
+  - toc:
+      permalink: true
+      title: On this page
+  - tables
