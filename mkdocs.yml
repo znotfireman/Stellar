@@ -1,5 +1,6 @@
 site_name: Stellar
 site_url: https://znotfireman.github.io/Stellar
+repo_name: znotfireman/Stellar
 repo_url: https://github.com/znotfireman/Stellar
 
 nav:
@@ -57,6 +58,10 @@ extra_css:
   - assets/stylesheets/stellardoc.css
 
 plugins:
+  - glightbox:
+      background: none
+      draggable: false
+      effect: fade
   - mike:
       alias_type: symlink
       redirect_template: null
@@ -66,8 +71,11 @@ plugins:
       css_dir: css
       javascript_dir: js
   - tags
+  - search
 
 theme:
+  name: material
+  custom_dir: docs/assets/overrides
   favicon: assets/images/favicon.png
   logo: assets/images/logo.svg
   icon:
@@ -85,8 +93,6 @@ theme:
       example: octicons/beaker-16
       quote: octicons/quote-16
     repo: fontawesome/brands/github
-  name: material
-  custom_dir: docs/assets/overrides
   font:
     text: Plus Jakarta Sans
     code: JetBrains Mono

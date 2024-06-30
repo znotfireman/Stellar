@@ -15,7 +15,7 @@ Utilities for working with reactive graphs.
 
 <div class="stellardoc-api-section" markdown>
 
-## [Members](./members/)
+## [Members](members/index.md)
 
 <a href="./members/eventual">
 	<span class="stellardoc-api-icon" markdown>:octicons-package-24:</span>

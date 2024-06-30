@@ -1,5 +1,5 @@
 /*
- * COLORS
+ * THEME
  */
 
 :root {
@@ -171,6 +171,16 @@
 	--md-footer-bg-color--dark: var(--stellardoc-gray-09);
 }
 
+[data-md-color-scheme="stellardoc-light"] img[src$="#only-dark"],
+[data-md-color-scheme="stellardoc-light"] img[src$="#gh-dark-mode-only"] {
+	display: none;
+}
+
+[data-md-color-scheme="stellardoc-dark"] img[src$="#only-light"],
+[data-md-color-scheme="stellardoc-dark"] img[src$="#gh-light-mode-only"] {
+	display: none;
+}
+
 /*
  * GENERAL
  */
@@ -250,6 +260,27 @@
 	font-weight: 500;
 	margin-right: 0.5em;
 	padding: 0.25em 1em;
+}
+
+/*
+ * SEARCH
+ */
+.md-search__form {
+	background-color: var(--md-default-bg-color);
+	border-radius: .1rem;
+	height: 1.8rem;
+}
+
+.md-search__input {
+	color: var(--md-default-fg-color);
+}
+
+.md-search__input::placeholder {
+	color: var(--md-default-fg-color);
+}
+
+.md-search__form:hover {
+	background-color: var(--md-default-fg-color--lightest);
 }
 
 /*
