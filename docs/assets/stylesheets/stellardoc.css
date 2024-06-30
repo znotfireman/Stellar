@@ -134,7 +134,7 @@
 	--md-code-hl-color--light: var(--stellardoc-orange-a3);
 
 	--md-typeset-color: var(--stellardoc-gray-01);
-	--md-typeset-a-color: var(--stellardoc-orange);
+	--md-typeset-a-color: var(--stellardoc-orange--dark);
 
 	--md-code-hl-number-color: hsl(40, 75%, 60%);
 	--md-code-hl-special-color: hsl(290, 60%, 70%);

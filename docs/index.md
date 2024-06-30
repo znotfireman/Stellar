@@ -53,7 +53,4 @@ extendedCleanup(scope)
 
 </div>
 
-hi
-
-
 </section>
