@@ -11,6 +11,8 @@
 
 # Stellar
 
+![GitHub License](https://img.shields.io/github/license/znotfireman/Stellar)
+![GitHub commit activity](https://img.shields.io/github/commit-activity/t/znotfireman/Stellar)
 [![Build status](https://github.com/znotfireman/Stellar/workflows/CI/badge.svg)](https://github.com/znotfireman/Stellar/actions)
 
 **The radiant set of utilities for [Fusion](https://elttob.uk/Fusion/0.3/).**
